@@ -1,0 +1,13 @@
+#! /usr/bin/env ruby
+
+require 'passphrase/generator'
+
+p = Passphrase::Generator.new(ARGV)
+p.run
+if p.odd_char
+  puts "unmixed phrase => #{p.unmixed_phrase}" 
+  puts "odd character  => #{p.odd_char}"
+  puts "passphrase     => #{p.phrase}"
+else
+  puts "passphrase => #{p.phrase}"
+end
