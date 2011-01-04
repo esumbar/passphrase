@@ -21,7 +21,7 @@ module Passphrase
 
     def run
       word_list = WordList::create
-      list_selector = Random.new(@num_words, 0, 1).rand_array
+      list_selector = Random.new(@num_words, 0, word_list.length - 1).rand_array
       @num_words.times do |iword|
         word_hash = Random.new(5, 1, 6).rand_array.join.to_sym
         @words << word_list[list_selector[iword]][word_hash]
@@ -42,8 +42,8 @@ module Passphrase
         %w( ^  =  }  >  3  9 )
       odd_char_index = Random.new(1, 0, odd.length - 1).rand_array.shift
       word_index = Random.new(1, 0, @num_words - 1).rand_array.shift
-      word_size = @words[word_index].length
-      char_index = Random.new(1, 0, word_size - 1).rand_array.shift unless word_size.zero?
+      word_length = @words[word_index].length
+      char_index = Random.new(1, 0, word_length - 1).rand_array.shift unless word_length.zero?
       char_index ||= 0
       @words[word_index][char_index] = @odd_char = odd[odd_char_index]
       @phrase = @words.join(' ')
