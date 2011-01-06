@@ -20,7 +20,7 @@ module Passphrase
     end
 
     def run
-      word_list = WordList::create
+      word_list = WordList.create
       list_selector = Random.new(@num_words, 0, word_list.length - 1).rand_array
       @num_words.times do |iword|
         word_hash = Random.new(5, 1, 6).rand_array.join.to_sym
