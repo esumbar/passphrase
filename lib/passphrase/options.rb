@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 
 require 'optparse'
+require File.join(File.dirname(__FILE__), 'version')
 
 module Passphrase
   class Options
@@ -36,7 +37,7 @@ module Passphrase
           exit
         end
         opts.on_tail("-v", "--version", "Show version") do
-          puts "unknown"
+          puts "version: #{Passphrase::Version::STRING}"
           exit
         end
 
