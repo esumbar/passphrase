@@ -29,7 +29,7 @@ module Passphrase
                 "Desired number of words (#{NUM_WORDS_RANGE.to_s}), default #{DEFAULT_NUM_WORDS}") do |num|
           @num_words = num
         end
-        opts.on("-m", "--[no-]mix", "Mix in odd character, default mix") do |m|
+        opts.on("-x", "--[no-]mix", "Mix in odd character, default mix") do |m|
           @mix = m
         end
         opts.on_tail("-h", "--help", "Show this message") do
