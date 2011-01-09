@@ -1,6 +1,43 @@
 = passphrase
 
-Description goes here.
+Passphrase is a command line tool written in Ruby for generating passphrases
+using the {Diceware(TM) method}[http://world.std.com/~reinhold/diceware.html].
+
+The act of rolling dice is simulated by requesting random numbers from
+{www.random.org}[http://www.random.org]. If a network error occurs or a request
+fails, the program gracefully degenerates to using Ruby's global +rand+ method,
+which is based on the Mersenne Twister algorithm.
+
+Words in the generated passphrase are selected from either the Diceware list or
+the alternate list edited by Alan Beale, referred to as the _Beale_ list.  The
+choice of list for each word is made randomly. Both lists are embedded into the
+code as compressed, base64 encoded strings. No external files are referenced.
+
+== Generating a passphrase
+
+The command line interface is simple. You have the option to specify the number
+of words in the generated passphrase within the range of 3 to 10. The default
+is 5. One _odd_ character is automatically mixed into one of the words
+comprising the passphrase. You can forgo mixing if desired.
+
+  Usage: passphrase [options]
+  Options:
+    -n, --num-words NUMBER           Desired number of words (3..10), default 5
+    -x, --[no-]mix                   Mix in odd character, default mix
+    -h, --help                       Show this message
+    -v, --version                    Show version
+
+== Examples
+
+  $ passphrase --num-words 3
+  unmixed phrase => shot elm mild
+  odd character  => !
+  passphrase     => shot e!m mild
+
+  $ passphrase --num-words 4 --no-mix
+  passphrase => humus smooth persia mz
+
+If you don't like a generated passphrase, repeat the command.
 
 == Contributing to passphrase
  
