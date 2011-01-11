@@ -37,7 +37,7 @@ module Passphrase
           exit
         end
         opts.on_tail("-v", "--version", "Show version") do
-          puts "version: #{Passphrase::Version::STRING}"
+          puts "#{$PROGRAM_NAME}, version #{Passphrase::Version::STRING}"
           exit
         end
 
