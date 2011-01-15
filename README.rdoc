@@ -1,6 +1,6 @@
 = passphrase
 
-Passphrase is a command line tool written in Ruby for generating passphrases
+Passphrase is a command line tool written in Ruby for generating a passphrase
 using the {Diceware(TM) method}[http://world.std.com/~reinhold/diceware.html].
 
 The act of rolling dice is simulated by requesting random numbers from
