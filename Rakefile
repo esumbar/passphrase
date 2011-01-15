@@ -18,17 +18,16 @@ Rake::TestTask.new(:test) do |test|
   test.test_files = FileList['test/test*.rb']
 end
 
-require 'rake/gempackagetask'
-spec = Gem::Specification.new do |s|
-  s.name         = "passphrase"
-  s.version      = File.exist?('VERSION') ? File.read('VERSION') : ""
-  s.summary      = "Generate a passphrase using the Diceware method."
-  s.description  = File.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-  s.author       = "Edmund Sumbar"
-  s.email        = "esumbar@gmail.com"
-  s.platform     = Gem::Platform::RUBY
-  s.files        = FileList['lib/**/*.rb', 'bin/*', '[A-Z]*'].to_a
-  s.executables  = [ 'passphrase' ]
-  s.has_rdoc     = false
+require 'jeweler'
+require './lib/passphrase/version.rb'
+Jeweler::Tasks.new do |gem|
+  gem.name        = "passphrase"
+  gem.version     = Passphrase::Version::STRING
+  gem.summary     = "Generate a passphrase using the Diceware method."
+  gem.description = File.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
+  gem.author      = "Edmund Sumbar"
+  gem.email       = "esumbar@gmail.com"
+  gem.files       = FileList['lib/**/*.rb', 'bin/*', '[A-Z]*'].to_a
+  gem.executables = [ 'passphrase' ]
 end
-Rake::GemPackageTask.new(spec).define
+Jeweler::RubygemsDotOrgTasks.new
