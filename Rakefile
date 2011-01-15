@@ -22,12 +22,12 @@ require 'jeweler'
 require './lib/passphrase/version.rb'
 Jeweler::Tasks.new do |gem|
   gem.name        = "passphrase"
+  gem.homepage    = "http://github.com/esumbar/passphrase"
   gem.version     = Passphrase::Version::STRING
   gem.summary     = "Generate a passphrase using the Diceware method."
   gem.description = File.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
   gem.author      = "Edmund Sumbar"
   gem.email       = "esumbar@gmail.com"
-  gem.files       = FileList['lib/**/*.rb', 'bin/*', '[A-Z]*'].to_a
   gem.executables = [ 'passphrase' ]
 end
 Jeweler::RubygemsDotOrgTasks.new
