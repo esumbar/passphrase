@@ -3,10 +3,12 @@
 module Passphrase
   module Version
 
+    # rubygems rational versioning policy
+    # http://docs.rubygems.org/read/chapter/7
     MAJOR = 0
     MINOR = 0
-    PATCH = 0
+    BUILD = 1
 
-    STRING = [MAJOR, MINOR, PATCH].compact.join('.')
+    STRING = [MAJOR, MINOR, BUILD].compact.join('.')
   end
 end
