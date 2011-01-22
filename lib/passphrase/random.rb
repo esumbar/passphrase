@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 
 require 'net/http'
+require 'securerandom'
 
 module Passphrase
   class Random
@@ -33,7 +34,7 @@ module Passphrase
       max = @max - @min + 1
       offset = @min
       @num.times do
-        @rand_array << (rand(max) + offset)
+        @rand_array << (SecureRandom.random_number(max) + offset)
       end
       @via_random_org = false
     end
