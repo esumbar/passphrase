@@ -7,7 +7,7 @@ module Passphrase
     # http://docs.rubygems.org/read/chapter/7
     MAJOR = 0
     MINOR = 0
-    BUILD = 1
+    BUILD = 2
 
     STRING = [MAJOR, MINOR, BUILD].compact.join('.')
   end
