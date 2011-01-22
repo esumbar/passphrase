@@ -52,7 +52,7 @@ module Passphrase
 
     def validate
       unless NUM_WORDS_RANGE.include?(@num_words)
-        STDERR.puts "Number of words out of range: allowed #{NUM_WORD_RANGE.to_s}: specified #{@num_words}"
+        STDERR.puts "Number of words out of range: allowed #{NUM_WORDS_RANGE.to_s}: specified #{@num_words}"
         exit(1)
       end
     end
