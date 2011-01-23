@@ -10,7 +10,7 @@ written in Ruby for generating a passphrase using the Diceware method.
 
 The act of rolling dice is simulated by requesting random numbers from
 {www.random.org}[http://www.random.org]. If a network error occurs or a request
-fails, the program gracefully degenerates to using SecureRandom.random_number.
+fails, the program gracefully degenerates to using SecureRandom::random_number.
 
 Words in the generated passphrase are selected from either the Diceware list or
 the alternate list edited by Alan Beale, referred to as the _Beale_ list.  The
