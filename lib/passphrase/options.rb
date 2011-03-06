@@ -29,14 +29,14 @@ module Passphrase
                 "Desired number of words (#{NUM_WORDS_RANGE.to_s}), default #{DEFAULT_NUM_WORDS}") do |num|
           @num_words = num
         end
-        opts.on("-x", "--[no-]mix", "Mix in odd character, default mix") do |m|
+        opts.on("-x", "--[no-]mix", "Mix in cap, num, non-alphanum, default mix") do |m|
           @mix = m
         end
-        opts.on_tail("-h", "--help", "Show this message") do
+        opts.on_tail("-h", "--help", "Show this message and exit") do
           puts opts
           exit
         end
-        opts.on_tail("-v", "--version", "Show version") do
+        opts.on_tail("-v", "--version", "Show version and exit") do
           puts "#{File.basename($PROGRAM_NAME)}, version #{Passphrase::Version::STRING}"
           exit
         end
