@@ -7,15 +7,12 @@ require File.join(File.dirname(__FILE__), 'random')
 module Passphrase
   class Generator
 
-    attr_reader :num_words
-    attr_reader :odd_char
     attr_reader :phrase
     attr_reader :unmixed_phrase
     attr_reader :words
 
     def initialize(argv)
       @options = Options.new(argv)
-      @num_words = @options.num_words
       @words = []
     end
 
@@ -27,12 +24,15 @@ module Passphrase
         @words << word_list[list_selector[iword]][word_hash]
       end
       @phrase = @unmixed_phrase = @words.join(' ')
-      mix_odd_char if @options.mix
+      mix_phrase if @options.mix
     end
 
     private
 
-    def mix_odd_char
+    def mix_phrase
+      mixin_capital
+      mixin_number
+      mixin_nonalphanum
       odd = 
         %w( ~  &  +  :  ?  4 ) +
         %w( !  *  [  ;  /  5 ) +
@@ -47,6 +47,20 @@ module Passphrase
       char_index ||= 0
       @words[word_index][char_index] = @odd_char = odd[odd_char_index]
       @phrase = @words.join(' ')
+    end
+    
+    def mixin_capital
+      # TODO
+    end
+    
+    def mixin_number
+      numbers = ("0".."9").to_a
+      # TODO
+    end
+    
+    def mixin_nonalphanum
+      non_alphanums = %w( ~ ! # $ % ^ & * \( \) - = + [ ] \\ { } : ; " ' < > ? / )
+      # TODO
     end
   end
 end
