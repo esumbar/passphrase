@@ -4,9 +4,8 @@ require 'passphrase/generator'
 
 p = Passphrase::Generator.new(ARGV)
 p.run
-if p.odd_char
-  puts "unmixed phrase => #{p.unmixed_phrase}" 
-  puts "odd character  => #{p.odd_char}"
+if p.mix?
+  puts "unmixed phrase => #{p.unmixed_phrase}"
   puts "passphrase     => #{p.phrase}"
 else
   puts "passphrase => #{p.phrase}"
