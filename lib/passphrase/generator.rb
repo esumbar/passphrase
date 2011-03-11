@@ -24,7 +24,8 @@ module Passphrase
         word_hash = Random.new(5, 1, 6).to_array.join.to_sym
         @words << word_list[list_selector[iword]][word_hash]
       end
-      @phrase = @unmixed_phrase = @words.join(" ")
+      @unmixed_phrase = @words.join(" ")
+      @phrase = @unmixed_phrase.clone
       mix_phrase if mix?
     end
     
@@ -35,7 +36,6 @@ module Passphrase
     private
 
     def mix_phrase
-      @nchars = @phrase.length
       mixin_capital
       mixin_number
       mixin_nonalphanum
@@ -56,13 +56,21 @@ module Passphrase
     end
     
     def mixin_number
+      # if a number character is not already present
       numbers = ("0".."9").to_a
-      # TODO
+      number = numbers[Random.new(1, 0, numbers.length - 1).to_array.shift]
+      @phrase[selected_index] = number
     end
     
     def mixin_nonalphanum
       non_alphanums = %w( ~ ! # $ % ^ & * \( \) - = + [ ] \\ { } : ; " ' < > ? / )
       # TODO
+    end
+    
+    def selected_index
+      plen = @phrase.length
+      i = Random.new(1, 0, plen - 1).to_array.shift
+      # if i lands on a space character, go to the next char modulo the phrase length
     end
   end
 end
