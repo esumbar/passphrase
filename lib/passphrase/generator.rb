@@ -9,7 +9,6 @@ module Passphrase
 
     attr_reader :phrase
     attr_reader :unmixed_phrase
-    attr_reader :words
 
     def initialize(argv)
       @options = Options.new(argv)
@@ -37,7 +36,7 @@ module Passphrase
 
     def mix_phrase
       mixin_capital
-      mixin_number
+      mixin_number unless @phrase =~ /\d/
       mixin_nonalphanum
     end
     
@@ -56,9 +55,9 @@ module Passphrase
     end
     
     def mixin_number
-      # if a number character is not already present
       numbers = ("0".."9").to_a
       number = numbers[Random.new(1, 0, numbers.length - 1).to_array.shift]
+      puts number
       @phrase[selected_index] = number
     end
     
@@ -68,9 +67,19 @@ module Passphrase
     end
     
     def selected_index
-      plen = @phrase.length
-      i = Random.new(1, 0, plen - 1).to_array.shift
-      # if i lands on a space character, go to the next char modulo the phrase length
+      offset = 0
+      spaces = []
+      (@options.num_words - 1).times do
+        spaces << @phrase.index(/\s/, offset)
+        offset = spaces.last.succ
+      end
+      puts spaces
+      len = @phrase.length
+      i = Random.new(1, 0, len - 1).to_array.shift
+      puts i
+      i.succ.modulo(len) if spaces.include?(i)
+      puts i
+      i
     end
   end
 end
