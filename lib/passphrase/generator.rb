@@ -40,16 +40,6 @@ module Passphrase
       mixin_nonalphanum
     end
     
-    def xxx
-      odd_char_index = Random.new(1, 0, odd.length - 1).to_array.shift
-      word_index = Random.new(1, 0, @num_words - 1).to_array.shift
-      word_length = @words[word_index].length
-      char_index = Random.new(1, 0, word_length - 1).to_array.shift unless word_length.zero?
-      char_index ||= 0
-      @words[word_index][char_index] = @odd_char = odd[odd_char_index]
-      @phrase = @words.join(' ')
-    end
-    
     def mixin_capital
       return unless @phrase =~ /[a-z]/
       index = selected_index
