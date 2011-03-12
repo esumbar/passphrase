@@ -51,7 +51,14 @@ module Passphrase
     end
     
     def mixin_capital
-      # TODO
+      return unless @phrase =~ /[a-z]/
+      index = selected_index
+      character = @phrase.slice(index, 1)
+      until character =~ /[a-z]/
+        index = index.succ.modulo(@phrase.length)
+        character = @phrase.slice(index, 1)
+      end
+      @phrase[index] = character.upcase
     end
     
     def mixin_number
