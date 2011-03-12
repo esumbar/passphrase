@@ -2,11 +2,12 @@
 
 Trying to come up with a good passphrase when creating an SSH public key pair
 or when signing up for an online service is a pain. Typical password generators
-yield a string of random characters which is secure but is hard to type. The
-{Diceware method}[http://world.std.com/~reinhold/diceware.html] constructs a
-passphrase made up of more-or-less recognizable words. This makes it easier to
-type, while still being reasonably secure.  Passphrase is a command line tool
-written in Ruby for generating a passphrase using the Diceware method.
+yield a string of random characters which may be strong but is often hard to
+type. The {Diceware method}[http://world.std.com/~reinhold/diceware.html]
+constructs a passphrase made up of more-or-less recognizable words. This makes
+it easier to type, while still being reasonably secure. Passphrase is a command
+line tool written in Ruby for generating a passphrase using the Diceware
+method.
 
 The act of rolling dice is simulated by requesting random numbers from
 {www.random.org}[http://www.random.org]. If a network error occurs or a request
@@ -19,24 +20,24 @@ code as compressed, base64 encoded strings. No external files are referenced.
 
 == Generating a passphrase
 
-The command line interface is simple. You have the option to specify the number
-of words in the generated passphrase within the range of 3 to 10. The default
-is 5. One _odd_ character is automatically mixed into one of the words
-comprising the passphrase. You can omit mixing if desired.
+The command line interface is simple. You have the option to request from 3 to
+10 words in the generated passphrase. The default is 5 if a number is not
+specified. In addition, at least one capital letter, one number character, and
+one non-alphanumeric character are automatically mixed into the passphrase.
+However, you can omit mixing if desired.
 
   Usage: passphrase [options]
   Options:
     -n, --num-words NUMBER           Desired number of words (3..10), default 5
-    -x, --[no-]mix                   Mix in odd character, default mix
-    -h, --help                       Show this message
-    -v, --version                    Show version
+    -x, --[no-]mix                   Mix in cap, num, non-alphanum, default mix
+    -h, --help                       Show this message and exit
+    -v, --version                    Show version and exit
 
 == Examples
 
   $ passphrase --num-words 3
-  unmixed phrase => shot elm mild
-  odd character  => !
-  passphrase     => shot e!m mild
+  unmixed phrase => tomb sima smog
+  passphrase     => ]omb s0ma smoG
 
   $ passphrase --num-words 4 --no-mix
   passphrase => humus smooth persia mz
