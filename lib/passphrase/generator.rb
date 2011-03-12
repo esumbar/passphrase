@@ -35,8 +35,8 @@ module Passphrase
     private
 
     def mix_phrase
-      mixin_capital
-      mixin_number unless @phrase =~ /\d/
+      mixin_capital     unless @phrase =~ /[A-Z]/
+      mixin_number      unless @phrase =~ /\d/
       mixin_nonalphanum
     end
     
@@ -57,7 +57,6 @@ module Passphrase
     def mixin_number
       numbers = ("0".."9").to_a
       number = numbers[Random.new(1, 0, numbers.length - 1).to_array.shift]
-      puts number
       @phrase[selected_index] = number
     end
     
@@ -68,18 +67,13 @@ module Passphrase
     
     def selected_index
       offset = 0
-      spaces = []
+      word_breaks = []
       (@options.num_words - 1).times do
-        spaces << @phrase.index(/\s/, offset)
-        offset = spaces.last.succ
+        word_breaks << @phrase.index(/\s/, offset)
+        offset = word_breaks.last.succ
       end
-      puts spaces
-      len = @phrase.length
-      i = Random.new(1, 0, len - 1).to_array.shift
-      puts i
-      i.succ.modulo(len) if spaces.include?(i)
-      puts i
-      i
+      index = Random.new(1, 0, @phrase.length - 1).to_array.shift
+      word_breaks.include?(index) ? index.succ : index
     end
   end
 end
