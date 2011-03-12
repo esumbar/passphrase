@@ -66,14 +66,14 @@ module Passphrase
     end
     
     def selected_index
-      offset = 0
-      word_breaks = []
-      (@options.num_words - 1).times do
-        word_breaks << @phrase.index(/\s/, offset)
-        offset = word_breaks.last.succ
-      end
       index = Random.new(1, 0, @phrase.length - 1).to_array.shift
       word_breaks.include?(index) ? index.succ : index
+    end
+    
+    def word_breaks
+      @words[1..-2].inject([ @words.first.length ]) do |memo, word|
+        memo << (memo.last + word.length.succ)
+      end
     end
   end
 end
