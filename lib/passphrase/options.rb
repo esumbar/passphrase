@@ -4,62 +4,62 @@ require 'optparse'
 require File.join(File.dirname(__FILE__), 'version')
 
 module Passphrase
-	class Options
+  class Options
 
-		NUM_WORDS_RANGE = (3..10)
-		DEFAULT_NUM_WORDS = 5
+    NUM_WORDS_RANGE = (3..10)
+    DEFAULT_NUM_WORDS = 5
 
-		attr_reader :num_words
-		attr_reader :mix
-		attr_reader :local
+    attr_reader :num_words
+    attr_reader :mix
+    attr_reader :local
 
-		def initialize(argv)
-			@num_words = DEFAULT_NUM_WORDS
-			@mix = true
-			@local = false
-			parse(argv)
-			validate
-		end
+    def initialize(argv)
+      @num_words = DEFAULT_NUM_WORDS
+      @mix = true
+      @local = false
+      parse(argv)
+      validate
+    end
 
-		private
+    private
 
-		def parse(argv)
-			OptionParser.new do |opts|
-				opts.banner = "Usage: passphrase [options]"
-				opts.separator "Options:"
-				opts.on("-n", "--num-words NUMBER", Integer,
-								"Desired number of words (#{NUM_WORDS_RANGE.to_s}), default #{DEFAULT_NUM_WORDS}") do |num|
-					@num_words = num
-								end
-				opts.on("-x", "--[no-]mix", "Mix in cap, num, non-alphanum, default mix") do |m|
-					@mix = m
-				end
-				opts.on("-l", "--local", "Forcefully use the local random number generator") do |l|
-					@local = l
-				end
-				opts.on_tail("-h", "--help", "Show this message and exit") do
-					puts opts
-					exit
-				end
-				opts.on_tail("-v", "--version", "Show version and exit") do
-					puts "#{File.basename($PROGRAM_NAME)}, version #{Passphrase::Version::STRING}"
-					exit
-				end
+    def parse(argv)
+      OptionParser.new do |opts|
+        opts.banner = "Usage: passphrase [options]"
+        opts.separator "Options:"
+        opts.on("-n", "--num-words NUMBER", Integer,
+                "Desired number of words (#{NUM_WORDS_RANGE.to_s}), default #{DEFAULT_NUM_WORDS}") do |num|
+          @num_words = num
+        end
+        opts.on("-x", "--[no-]mix", "Mix in cap, num, non-alphanum, default mix") do |m|
+          @mix = m
+        end
+        opts.on("-l", "--local", "Forcefully use the local random number generator") do |l|
+          @local = l
+        end
+        opts.on_tail("-h", "--help", "Show this message and exit") do
+          puts opts
+          exit
+        end
+        opts.on_tail("-v", "--version", "Show version and exit") do
+          puts "#{File.basename($PROGRAM_NAME)}, version #{Passphrase::Version::STRING}"
+          exit
+        end
 
-				begin
-					opts.parse!(argv)
-				rescue OptionParser::ParseError => e
-					STDERR.puts e.message, "\n", opts
-					exit(1)
-				end
-			end
-		end
+        begin
+          opts.parse!(argv)
+        rescue OptionParser::ParseError => e
+          STDERR.puts e.message, "\n", opts
+          exit(1)
+        end
+      end
+    end
 
-		def validate
-			unless NUM_WORDS_RANGE.include?(@num_words)
-				STDERR.puts "Number of words out of range: allowed #{NUM_WORDS_RANGE.to_s}: specified #{@num_words}"
-				exit(1)
-			end
-		end
-	end
+    def validate
+      unless NUM_WORDS_RANGE.include?(@num_words)
+        STDERR.puts "Number of words out of range: allowed #{NUM_WORDS_RANGE.to_s}: specified #{@num_words}"
+        exit(1)
+      end
+    end
+  end
 end
