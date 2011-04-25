@@ -30,6 +30,7 @@ However, you can omit mixing if desired.
   Options:
     -n, --num-words NUMBER           Desired number of words (3..10), default 5
     -x, --[no-]mix                   Mix in cap, num, non-alphanum, default mix
+    -l, --local                      Forcefully use the local random number generator
     -h, --help                       Show this message and exit
     -v, --version                    Show version and exit
 
