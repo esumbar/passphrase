@@ -11,8 +11,8 @@ module Passphrase
     def initialize(num, min, max)
       @num, @min, @max = num, min, max
       @array_of_rands = []
-      generate_array_of_rands
       @via_random_org = true
+      generate_array_of_rands
     end
     
     def via_random_org?
