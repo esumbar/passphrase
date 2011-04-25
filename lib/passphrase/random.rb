@@ -12,6 +12,7 @@ module Passphrase
       @num, @min, @max = num, min, max
       @array_of_rands = []
       generate_array_of_rands
+      @via_random_org = true
     end
     
     def via_random_org?
@@ -36,14 +37,11 @@ module Passphrase
         response, data = site.get(query)
         raise unless response.code == "200"
         @array_of_rands = data.split.collect {|num| num.to_i}
-        @via_random_org = true
       else
         local_rands
-        @via_random_org = false
       end
     rescue
       local_rands
-      @via_random_org = false
     end
 
     def local_rands
@@ -52,6 +50,7 @@ module Passphrase
       @num.times do
         @array_of_rands << (SecureRandom.random_number(max) + offset)
       end
+      @via_random_org = false
     end
   end
 end
