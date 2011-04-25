@@ -11,10 +11,12 @@ module Passphrase
 
     attr_reader :num_words
     attr_reader :mix
+    attr_reader :local
 
     def initialize(argv)
       @num_words = DEFAULT_NUM_WORDS
       @mix = true
+      @local = false
       parse(argv)
       validate
     end
@@ -31,6 +33,9 @@ module Passphrase
         end
         opts.on("-x", "--[no-]mix", "Mix in cap, num, non-alphanum, default mix") do |m|
           @mix = m
+        end
+        opts.on("-l", "--local", "Forcefully use the local random number generator") do |l|
+          @local = l
         end
         opts.on_tail("-h", "--help", "Show this message and exit") do
           puts opts
