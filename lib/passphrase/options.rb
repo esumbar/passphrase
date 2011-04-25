@@ -34,7 +34,7 @@ module Passphrase
         opts.on("-x", "--[no-]mix", "Mix in cap, num, non-alphanum, default mix") do |m|
           @mix = m
         end
-        opts.on("-l", "--local", "Forcefully use the local random number generator") do |l|
+        opts.on("-l", "--local", "Force use of local random number generator") do |l|
           @local = l
         end
         opts.on_tail("-h", "--help", "Show this message and exit") do
