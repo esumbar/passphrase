@@ -6,10 +6,13 @@ require 'securerandom'
 module Passphrase
   class Random
 
+    @@use_random_org = true
+
     def initialize(num, min, max)
       @num, @min, @max = num, min, max
       @array_of_rands = []
       generate_array_of_rands
+      @via_random_org = true
     end
     
     def via_random_org?
@@ -19,18 +22,29 @@ module Passphrase
     def to_array
       @array_of_rands
     end
+    
+    def self.use_local
+      @@use_random_org = false
+    end  
 
     private
 
     def generate_array_of_rands
-      query = "/integers/?col=1&base=10&format=plain&rnd=new" + 
-        "&num=#{@num}&min=#{@min}&max=#{@max}"
-      site = Net::HTTP.new("www.random.org")
-      response, data = site.get(query)
-      raise unless response.code == "200"
-      @array_of_rands = data.split.collect {|num| num.to_i}
-      @via_random_org = true
+      if @@use_random_org
+        query = "/integers/?col=1&base=10&format=plain&rnd=new" + 
+          "&num=#{@num}&min=#{@min}&max=#{@max}"
+        site = Net::HTTP.new("www.random.org")
+        response, data = site.get(query)
+        raise unless response.code == "200"
+        @array_of_rands = data.split.collect {|num| num.to_i}
+      else
+        local_rands
+      end
     rescue
+      local_rands
+    end
+
+    def local_rands
       max = @max - @min + 1
       offset = @min
       @num.times do

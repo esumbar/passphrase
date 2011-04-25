@@ -16,6 +16,7 @@ module Passphrase
     def initialize(argv)
       @options = Options.new(argv)
       @words = []
+      Random.use_local if @options.local
     end
 
     def run
