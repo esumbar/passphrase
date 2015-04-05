@@ -1,5 +1,5 @@
-*.swp
-doc
-.bundle
-pkg
-*.gemspec
+/.yardoc
+/doc
+/pkg
+Gemfile.lock
+*.sqlite3
