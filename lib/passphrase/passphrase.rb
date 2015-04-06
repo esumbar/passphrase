@@ -23,7 +23,7 @@ module Passphrase
       yield self if block_given?
     end
 
-    # Invokes the Diceware method by running {DicewareMethod.run}. The threee
+    # Invokes the Diceware method by running {DicewareMethod.run}. The three
     # resulting arrays are accumulated into instance variables. The words
     # array is formatted into a single passphrase string and stored in another
     # instance variable. The method returns itself to allow method chaining.
