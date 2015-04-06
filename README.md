@@ -25,7 +25,7 @@ option, which causes the gem to be verified before being installed. To invoke
 this option, you must first add my public key `esumbar.pem` to your list of
 trusted certificates, as follows.
 
-    $ gem cert --add <(curl -Ls https://raw.github.com/esumbar/passphrase/master/certs/esumbar.pem)
+    $ gem cert --add <(curl -Ls https://raw.githubusercontent.com/esumbar/passphrase/master/certs/esumbar.pem)
 
 Finally, specify the appropriate security level when installing.
 
