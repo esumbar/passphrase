@@ -37,6 +37,7 @@ module Passphrase
     def setup_database
       wordlist_file = "wordlist/words.sqlite3"
       wordlist_path = File.join(File.dirname(__FILE__), wordlist_file)
+      raise "Wordlist database not found" unless File.exist?(wordlist_path)
       @db = SQLite3::Database.new(wordlist_path, readonly: true)
     end
 
