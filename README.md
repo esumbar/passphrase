@@ -152,9 +152,7 @@ compliment of 7776 entries.
 To run the command-line tool within the repository directory, try `ruby -Ilib
 bin/passphrase`. You can also experiment with the library in irb. For example,
 
-    $ irb -Ilib
-    >> require "passphrase"
-    => true
+    $ irb -Ilib -rpassphrase
     >> p = Passphrase::Passphrase.new(number_of_words: 3)
     => {:passphrase=>"", :number_of_words=>0, :word_origins=>{}}
     >> p.generate
@@ -166,10 +164,10 @@ Run the tests with `rake spec`.
 
 ### Future enhancements
 In order to make passphrases more acceptable as passwords, a feature could be
-added to the library to capitalize a random letter, replace a random
-alphabetic character with a numeric character (if one does not already exist),
-and mix in a special character, like "`$`" or "`%`" etc. The command-line
-option could be called `--passwordize|-p`.
+added to the library to upcase a random letter, replace a random alphabetic
+character with a numeric character (if one does not already exist), and mix in
+a special character, like "`$`" or "`%`" etc. The command-line option could be
+called `--passwordize|-p`.
 
 ## Changelog
 See {file:CHANGELOG.md} for a list of changes.
