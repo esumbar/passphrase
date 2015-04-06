@@ -1,12 +1,5 @@
-#! /usr/bin/env ruby
+#!/usr/bin/env ruby
 
-require 'passphrase/generator'
+require "passphrase"
 
-p = Passphrase::Generator.new(ARGV)
-p.run
-if p.mix?
-  puts "unmixed phrase => #{p.unmixed_phrase}"
-  puts "passphrase     => #{p.phrase}"
-else
-  puts "passphrase => #{p.phrase}"
-end
+Passphrase::CLI.parse(ARGV)

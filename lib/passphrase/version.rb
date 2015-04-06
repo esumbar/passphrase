@@ -1,14 +1,5 @@
-#! /usr/bin/env ruby
-
 module Passphrase
-  module Version
-
-    # rubygems rational versioning policy
-    # http://docs.rubygems.org/read/chapter/7
-    MAJOR = 0
-    MINOR = 1
-    BUILD = 0
-
-    STRING = [MAJOR, MINOR, BUILD].compact.join('.')
-  end
+  # Version numbers are bumped according to {http://semver.org Semantic
+  # Versioning}.
+  VERSION = "1.0.0"
 end
