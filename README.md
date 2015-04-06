@@ -2,22 +2,28 @@
 Use Passphrase to generate a passphrase for SSH or GPG keys. For example, on
 the command-line, run
 
-    $ passphrase --num-words=4
-    dokusi uolgo allunga totalisa
+```bash
+$ passphrase --num-words=4
+dokusi uolgo allunga totalisa
+```
 
 or programmatically,
 
-    require "passphrase"
-    p = Passphrase::Passphrase.new(number_of_words: 4)
-    p.generate
-    passphrase = p.passphrase
+```ruby
+require "passphrase"
+p = Passphrase::Passphrase.new(number_of_words: 4)
+p.generate
+passphrase = p.passphrase
+```
 
 Eliminate the spaces between words to use the result as a potential password.
 
 ## Installation
 The Passphrase command-line tool and library can be installed with
 
-    $ gem install passphrase
+```bash
+$ gem install passphrase
+```
 
 However, because the gem is cryptographically signed to prevent tampering, the
 preferred installation command should include the `--trust-policy` security
@@ -25,11 +31,15 @@ option, which causes the gem to be verified before being installed. To invoke
 this option, you must first add my public key `esumbar.pem` to your list of
 trusted certificates, as follows.
 
-    $ gem cert --add <(curl -Ls https://raw.githubusercontent.com/esumbar/passphrase/master/certs/esumbar.pem)
+```bash
+$ gem cert --add <(curl -Ls https://raw.githubusercontent.com/esumbar/passphrase/master/certs/esumbar.pem)
+```
 
 Finally, specify the appropriate security level when installing.
 
-    $ gem install passphrase --trust-policy MediumSecurity
+```bash
+$ gem install passphrase --trust-policy MediumSecurity
+```
 
 Using `MediumSecurity` rather than `HighSecurity` omits dependent gems, in
 this case `sqlite3`, which is not signed, from the verification process.
@@ -37,43 +47,47 @@ this case `sqlite3`, which is not signed, from the verification process.
 ## Basic usage
 ### Command-line tool
 
-    $ passphrase --help
-    Usage: passphrase [options]
-        -n, --num-words=NUM           Number of words in passphrase 3..10
-                                      (default: 5)
-        -r, --[no-]random-org         Use random.org to generate random numbers
-                                      (default: --no-random-org)
-        -h, --help                    Show this message
-        -v, --version                 Show version
+```bash
+$ passphrase --help
+Usage: passphrase [options]
+    -n, --num-words=NUM           Number of words in passphrase 3..10
+                                  (default: 5)
+    -r, --[no-]random-org         Use random.org to generate random numbers
+                                  (default: --no-random-org)
+    -h, --help                    Show this message
+    -v, --version                 Show version
 
-    $ passphrase
-    sinmak termyne ismus affidavo recur
+$ passphrase
+sinmak termyne ismus affidavo recur
 
-    $ passphrase -n 4
-    apaisado vermouth seemag ebelik
+$ passphrase -n 4
+apaisado vermouth seemag ebelik
+```
 
 ### Ruby library
 
-    require "passphrase"
+```ruby
+require "passphrase"
 
-    # generate a passphrase with default options
-    p = Passphrase::Passphrase.new
-    p.generate
-    puts "passphrase: #{p}"
-    puts "passphrase internals: #{p.inspect}"
+# generate a passphrase with default options
+p = Passphrase::Passphrase.new
+p.generate
+puts "passphrase: #{p}"
+puts "passphrase internals: #{p.inspect}"
 
-    # generate three four-word passphrases using RANDOM.ORG
-    options = { number_of_words: 4, use_random_org: true }
-    p = Passphrase::Passphrase.new(options)
-    passphrase1 = p.generate.passphrase
-    passphrase2 = p.generate.passphrase
-    passphrase3 = p.generate.passphrase
+# generate three four-word passphrases using RANDOM.ORG
+options = { number_of_words: 4, use_random_org: true }
+p = Passphrase::Passphrase.new(options)
+passphrase1 = p.generate.passphrase
+passphrase2 = p.generate.passphrase
+passphrase3 = p.generate.passphrase
 
-    # generate an array of six-word passphrases
-    passphrase_array = Array.new(100)
-    Passphrase::Passphrase.new(number_of_words: 6) do |p|
-      passphrase_array.map! { |e| p.generate.passphrase }
-    end
+# generate an array of six-word passphrases
+passphrase_array = Array.new(100)
+Passphrase::Passphrase.new(number_of_words: 6) do |p|
+  passphrase_array.map! { |e| p.generate.passphrase }
+end
+```
 
 ## Background
 Passphrase implements the [Diceware
@@ -152,13 +166,15 @@ compliment of 7776 entries.
 To run the command-line tool within the repository directory, try `ruby -Ilib
 bin/passphrase`. You can also experiment with the library in irb. For example,
 
-    $ irb -Ilib -rpassphrase
-    >> p = Passphrase::Passphrase.new(number_of_words: 3)
-    => {:passphrase=>"", :number_of_words=>0, :word_origins=>{}}
-    >> p.generate
-    => {:passphrase=>"bolt flanella ininaen", :number_of_words=>3,...}
-    >> p.passphrase
-    => "bolt flanella ininaen"
+```bash
+$ irb -Ilib -rpassphrase
+>> p = Passphrase::Passphrase.new(number_of_words: 3)
+=> {:passphrase=>"", :number_of_words=>0, :word_origins=>{}}
+>> p.generate
+=> {:passphrase=>"bolt flanella ininaen", :number_of_words=>3,...}
+>> p.passphrase
+=> "bolt flanella ininaen"
+```
 
 Run the tests with `rake spec`.
 
