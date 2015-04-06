@@ -1,16 +1,11 @@
-module Passphrase; end
+require "passphrase/default"
+require "passphrase/diceware_method"
+require "passphrase/diceware_random"
+require "passphrase/language_query"
+require "passphrase/passphrase"
+require "passphrase/version"
+require "passphrase/word_query"
 
-Passphrase.autoload(:CLI, "passphrase/CLI")
-
-mandatory_modules = [
-  "default",
-  "diceware_method",
-  "diceware_random",
-  "language_query",
-  "passphrase",
-  "version",
-  "word_query"
-]
-mandatory_modules.each do |mod|
-  require "passphrase/#{mod}"
+module Passphrase
+  autoload(:CLI, "passphrase/CLI")
 end
