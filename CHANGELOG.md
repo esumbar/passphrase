@@ -2,9 +2,9 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
-## 1.0.0 - 2015-04-04
+## Version 1.0.0 - 2015-04-06
 This release is a complete re-write. None of the code from the previous
-release, version 0.1.0, was retained.
+release was retained.
 
 ### Added
 - Added YARD-style documentation throughout.
@@ -31,5 +31,5 @@ release, version 0.1.0, was retained.
 - Replaced the hash used to store the wordlists with an external SQLite 3
   database file.
 
-## 0.1.0 - 2011-04-25
+## Version 0.1.0 - 2011-04-25
 No change log was maintained for this and prior versions.
