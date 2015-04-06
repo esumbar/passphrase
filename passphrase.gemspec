@@ -4,7 +4,7 @@ require "passphrase/version"
 
 Gem::Specification.new do |spec|
   spec.name        = "passphrase"
-  spec.version     = Passphrase::Version::STRING
+  spec.version     = Passphrase::VERSION
   spec.license     = "MIT"
   spec.summary     = "Generate passphrases using the Diceware Method"
   spec.description = <<-EOF
