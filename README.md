@@ -128,8 +128,8 @@ Therefore, to select a word, Passphrase
 2. randomly selects one of 7776 lines from the corresponding wordlist
 3. randomly selects one word from the corresponding line
 
-This leads to roughly 10<sup>28</sup> possible five-word passphrases, for
-example.
+This leads to roughly 2<sup>66</sup> (10<sup>28</sup>) possible five-word
+passphrases, for example.
 
 Passphrase simulates the rolls of a die by using random numbers from one of
 two sources. The default is to use the standard SecureRandom class. You also
