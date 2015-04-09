@@ -5,6 +5,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 ## HEAD
 ### Added
 - Added SHA256 checksum calculation to rake_helper.rb.
+- Added :use_random_org key to Passphrase#inspect.
 
 ## Version 1.0.0 - 2015-04-06
 This release is a complete re-write. None of the code from the previous

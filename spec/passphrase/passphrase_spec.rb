@@ -83,6 +83,7 @@ module Passphrase
           expect(@result.inspect).to match(
             passphrase: "passphrase",
             number_of_words: 1,
+            use_random_org: nil,
             word_origins: { "passphrase" => {
               language: "language",
               die_rolls: "11111"
