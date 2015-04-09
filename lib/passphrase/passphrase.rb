@@ -60,7 +60,7 @@ module Passphrase
       {
         passphrase: @passphrase,
         number_of_words: @words.size,
-        use_random_org: @options[:use_random_org],
+        use_random_org: using_random_org?,
         word_origins: word_origins
       }
     end
