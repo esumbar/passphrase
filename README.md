@@ -41,7 +41,7 @@ this case `sqlite3`, which is not signed, from the verification process.
     Usage: passphrase [options]
         -n, --num-words=NUM           Number of words in passphrase 3..10
                                       (default: 5)
-        -r, --[no-]random-org         Use random.org to generate random numbers
+        -r, --[no-]random-org         Use RANDOM.ORG to generate random numbers
                                       (default: --no-random-org)
         -h, --help                    Show this message
         -v, --version                 Show version
