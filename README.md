@@ -7,10 +7,12 @@ the command-line, run
 
 or programmatically,
 
+```ruby
     require "passphrase"
     p = Passphrase::Passphrase.new(number_of_words: 4)
     p.generate
     passphrase = p.passphrase
+```
 
 Eliminate the spaces between words to use the result as a potential password.
 
@@ -54,6 +56,7 @@ this case `sqlite3`, which is not signed, from the verification process.
 
 ### Ruby library
 
+```ruby
     require "passphrase"
 
     # generate a passphrase with default options
@@ -74,6 +77,7 @@ this case `sqlite3`, which is not signed, from the verification process.
     Passphrase::Passphrase.new(number_of_words: 6) do |p|
       passphrase_array.map! { |e| p.generate.passphrase }
     end
+```
 
 ## Background
 Passphrase implements the [Diceware
@@ -154,7 +158,7 @@ bin/passphrase`. You can also experiment with the library in irb. For example,
 
     $ irb -Ilib -rpassphrase
     >> p = Passphrase::Passphrase.new(number_of_words: 3)
-    => {:passphrase=>"", :number_of_words=>0, :word_origins=>{}}
+    => {:passphrase=>"", :number_of_words=>3, :use_random_org=>nil, :word_origins=>{}}
     >> p.generate
     => {:passphrase=>"bolt flanella ininaen", :number_of_words=>3,...}
     >> p.passphrase
