@@ -48,15 +48,15 @@ module Passphrase
     # String representation of a Passphrase object
     # @return [String] the passphrase string
     def to_s
-      @passphrase
+      passphrase
     end
 
     # Returns details for the Passphrase object as a hash.
     # @return [Hash] the details of a Passphrase object
     def inspect
       {
-        passphrase: @passphrase,
-        number_of_words: @words.size,
+        passphrase: passphrase,
+        number_of_words: number_of_words,
         use_random_org: using_random_org?,
         word_origins: word_origins
       }
