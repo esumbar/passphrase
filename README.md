@@ -2,16 +2,19 @@
 Use Passphrase to generate a passphrase for SSH or GPG keys. For example, on
 the command-line, run
 
-    $ passphrase --num-words=4
-    dokusi uolgo allunga totalisa
+```bash
+$ passphrase --num-words=4
+dokusi uolgo allunga totalisa
+cat abc
+```
 
 or programmatically,
 
 ```ruby
-    require "passphrase"
-    p = Passphrase::Passphrase.new(number_of_words: 4)
-    p.generate
-    passphrase = p.passphrase
+require "passphrase"
+p = Passphrase::Passphrase.new(number_of_words: 4)
+p.generate
+passphrase = p.passphrase
 ```
 
 Eliminate the spaces between words to use the result as a potential password.
@@ -57,26 +60,26 @@ this case `sqlite3`, which is not signed, from the verification process.
 ### Ruby library
 
 ```ruby
-    require "passphrase"
+require "passphrase"
 
-    # generate a passphrase with default options
-    p = Passphrase::Passphrase.new
-    p.generate
-    puts "passphrase: #{p}"
-    puts "passphrase internals: #{p.inspect}"
+# generate a passphrase with default options
+p = Passphrase::Passphrase.new
+p.generate
+puts "passphrase: #{p}"
+puts "passphrase internals: #{p.inspect}"
 
-    # generate three four-word passphrases using RANDOM.ORG
-    options = { number_of_words: 4, use_random_org: true }
-    p = Passphrase::Passphrase.new(options)
-    passphrase1 = p.generate.passphrase
-    passphrase2 = p.generate.passphrase
-    passphrase3 = p.generate.passphrase
+# generate three four-word passphrases using RANDOM.ORG
+options = { number_of_words: 4, use_random_org: true }
+p = Passphrase::Passphrase.new(options)
+passphrase1 = p.generate.passphrase
+passphrase2 = p.generate.passphrase
+passphrase3 = p.generate.passphrase
 
-    # generate an array of six-word passphrases
-    passphrase_array = Array.new(100)
-    Passphrase::Passphrase.new(number_of_words: 6) do |p|
-      passphrase_array.map! { |e| p.generate.passphrase }
-    end
+# generate an array of six-word passphrases
+passphrase_array = Array.new(100)
+Passphrase::Passphrase.new(number_of_words: 6) do |p|
+  passphrase_array.map! { |e| p.generate.passphrase }
+end
 ```
 
 ## Background
