@@ -12,7 +12,7 @@ module Passphrase
         @passphrase.generate
       end
 
-      it "return a passphrase with the default number of words" do
+      it "returns a passphrase with the default number of words" do
         expect(@passphrase.number_of_words).to eq(Default.options[:number_of_words])
       end
 
