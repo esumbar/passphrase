@@ -156,7 +156,6 @@ compliment of 7776 entries.
 To run the command-line tool within the repository directory, try `ruby -Ilib
 bin/passphrase`. You can also experiment with the library in irb. For example,
 
-```ruby
     $ irb -Ilib -rpassphrase
     >> p = Passphrase::Passphrase.new(number_of_words: 3)
     => {:passphrase=>"", :number_of_words=>3, :use_random_org=>nil, :word_origins=>{}}
@@ -164,7 +163,7 @@ bin/passphrase`. You can also experiment with the library in irb. For example,
     => {:passphrase=>"bolt flanella ininaen", :number_of_words=>3,...}
     >> p.passphrase
     => "bolt flanella ininaen"
-```
+
 Run the tests with `rake spec`.
 
 ### Future enhancements
