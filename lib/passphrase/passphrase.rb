@@ -12,10 +12,14 @@ module Passphrase
     # @return [String] the passphrase string
     attr_reader :passphrase
 
+    # @return [Integer] the number of words in the passphrase
+    attr_reader :number_of_words
+
     # @param options [Hash] characteristics for a new Passphrase object
     # @yieldparam obj [self] the Passphrase object
     def initialize(options={})
       @options = Default.options.merge(options)
+      @number_of_words = @options[:number_of_words]
       @passphrase = ""
       @languages = []
       @die_rolls = []
@@ -32,13 +36,6 @@ module Passphrase
       @languages, @die_rolls, @words = DicewareMethod.run(@options)
       @passphrase = @words.join(" ")
       self
-    end
-
-    # This virtual attribute accessor returns the number of words in the
-    # generated passphrase.
-    # @return [Integer] the number of words in the passphrase
-    def number_of_words
-      @words.size
     end
 
     # A predicate method that returns true if the Passphrase object is

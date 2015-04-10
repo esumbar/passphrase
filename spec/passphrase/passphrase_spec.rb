@@ -33,7 +33,7 @@ module Passphrase
         expect(@passphrase).to respond_to(:using_random_org?)
       end
 
-      it "responds to virtual attribute reader method number_of_words()" do
+      it "responds to attribute reader method number_of_words()" do
         expect(@passphrase).to respond_to(:number_of_words).with(0).arguments
       end
 
@@ -43,10 +43,6 @@ module Passphrase
 
       it "initially contains an empty passphrase string" do
         expect(@passphrase.passphrase).to be_empty
-      end
-
-      it "initially contains zero words" do
-        expect(@passphrase.number_of_words).to eq(0)
       end
 
       it "should not be using RANDOM.ORG" do
