@@ -6,6 +6,28 @@ module Passphrase
       expect { |b| Passphrase.new(Default.options, &b) }.to yield_with_args(Passphrase)
     end
 
+    context "initialized with default options" do
+      before do
+        @passphrase = Passphrase.new
+        @passphrase.generate
+      end
+
+      it "return a passphrase with the default number of words" do
+        expect(@passphrase.number_of_words).to eq(Default.options[:number_of_words])
+      end
+
+      it "should not be using RANDOM.ORG" do
+        expect(@passphrase).not_to be_using_random_org
+      end
+    end
+
+    context "initialized to use RANDOM.ORG" do
+      it "the predicate method should confirm it is using RANDOM.ORG" do
+        passphrase = Passphrase.new(number_of_words: 3, use_random_org: true)
+        expect(passphrase).to be_using_random_org
+      end
+    end
+
     # Dependence on RANDOM.ORG only affects the DicewareRandom class.
     # Therefore, only need to test the case where RANDOM.ORG is not used.
     context "initialized to generate a passphrase with 1 word, not using RANDOM.ORG" do
@@ -29,12 +51,12 @@ module Passphrase
         expect(@passphrase).to respond_to(:passphrase)
       end
 
-      it "responds to predicate method using_random_org?()" do
-        expect(@passphrase).to respond_to(:using_random_org?)
-      end
-
       it "responds to attribute reader method number_of_words()" do
         expect(@passphrase).to respond_to(:number_of_words).with(0).arguments
+      end
+
+      it "responds to predicate method using_random_org?()" do
+        expect(@passphrase).to respond_to(:using_random_org?)
       end
 
       it "does not respond to the word_origins() method (private)" do
@@ -87,28 +109,6 @@ module Passphrase
             }
           )
         end
-      end
-    end
-
-    context "initialized to use RANDOM.ORG" do
-      it "the predicate method should confirm it is using RANDOM.ORG" do
-        passphrase = Passphrase.new(number_of_words: 3, use_random_org: true)
-        expect(passphrase).to be_using_random_org
-      end
-    end
-
-    context "initialized with default options" do
-      before do
-        @passphrase = Passphrase.new
-        @passphrase.generate
-      end
-
-      it "return a passphrase with the default number of words" do
-        expect(@passphrase.number_of_words).to eq(Default.options[:number_of_words])
-      end
-
-      it "should not be using RANDOM.ORG" do
-        expect(@passphrase).not_to be_using_random_org
       end
     end
   end
