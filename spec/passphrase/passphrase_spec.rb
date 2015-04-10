@@ -35,18 +35,6 @@ module Passphrase
         @passphrase = Passphrase.new(number_of_words: 1, use_random_org: nil)
       end
 
-      it "responds to the generate() method with zero arguments" do
-        expect(@passphrase).to respond_to(:generate).with(0).arguments
-      end
-
-      it "responds to the to_s() method" do
-        expect(@passphrase).to respond_to(:to_s)
-      end
-
-      it "responds to the inspect() method with zero arguments" do
-        expect(@passphrase).to respond_to(:inspect).with(0).arguments
-      end
-
       it "responds to attribute reader method passphrase()" do
         expect(@passphrase).to respond_to(:passphrase)
       end
@@ -55,8 +43,20 @@ module Passphrase
         expect(@passphrase).to respond_to(:number_of_words).with(0).arguments
       end
 
+      it "responds to the generate() method with zero arguments" do
+        expect(@passphrase).to respond_to(:generate).with(0).arguments
+      end
+
       it "responds to predicate method using_random_org?()" do
         expect(@passphrase).to respond_to(:using_random_org?)
+      end
+
+      it "responds to the to_s() method" do
+        expect(@passphrase).to respond_to(:to_s)
+      end
+
+      it "responds to the inspect() method with zero arguments" do
+        expect(@passphrase).to respond_to(:inspect).with(0).arguments
       end
 
       it "does not respond to the word_origins() method (private)" do
