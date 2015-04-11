@@ -20,10 +20,7 @@ module Passphrase
     def initialize(options={})
       @options = Default.options.merge(options)
       @number_of_words = @options[:number_of_words]
-      @passphrase = ""
-      @languages = []
-      @die_rolls = []
-      @words = []
+      generate
       yield self if block_given?
     end
 

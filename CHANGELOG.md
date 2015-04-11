@@ -9,6 +9,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Made :number_of_words an attribute of the Passphrase class.
+- Generate a passphrase when a Passphrase object is instantiated.
 
 ## Version 1.0.0 - 2015-04-06
 This release is a complete re-write. None of the code from the previous
