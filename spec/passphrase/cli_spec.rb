@@ -4,7 +4,12 @@ require "optparse"
 module Passphrase
   RSpec.describe CLI, "implements the command line interface" do
     before do
+      @saved_stdout = $stdout
       $stdout = StringIO.new
+    end
+
+    after(:each) do
+      $stdout = @saved_stdout
     end
 
     it "responds to class method parse() with one argument" do
@@ -29,11 +34,11 @@ module Passphrase
       CLI.parse(["-r"])
     end
 
-    it "does not emit an error when option -h is supplied" do
+    it "exits when option -h is supplied" do
       expect { CLI.parse(["-h"]) }.to raise_error(SystemExit)
     end
 
-    it "does not emit an error when option -v is supplied" do
+    it "exits when option -v is supplied" do
       expect { CLI.parse(["-v"]) }.to raise_error(SystemExit)
     end
 
