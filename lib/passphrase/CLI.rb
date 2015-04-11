@@ -14,6 +14,22 @@ module Passphrase
     #   given by ARGV (may be empty)
     # @return [void]
     def self.parse(args)
+      # Gotcha:
+      # The contents of an instance variable can be changed outside the class.
+      # class A
+      #   attr_reader :x
+      #   def initialize
+      #     @x = { a: 1, b: 2 }
+      #   end
+      # end
+      # a = A.new
+      # p a.x        #=> {:a=>1, :b=>2}
+      # x = a.x
+      # x[:b] = 99
+      # p a.x        #=> {:a=>1, :b=>99}
+      # Need to clone the defaults hash otherwise parsing could alter its
+      # contents. Although this causes no harm in the command-line tool, it
+      # causes havoc when the test suite is run.
       options = Default.options.clone
 
       default_number_of_words = Default.options[:number_of_words]
