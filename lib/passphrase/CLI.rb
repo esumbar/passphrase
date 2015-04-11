@@ -35,11 +35,12 @@ module Passphrase
 
       default_number_of_words = Default.options[:number_of_words]
       default_random_org = Default.options[:use_random_org] ? "--random-org" : "--no-random-org"
+      default_number_range = Default.number_range
 
       parser = OptionParser.new do |opts|
         opts.banner = "Usage: passphrase [options]"
         opts.on(:REQUIRED, "-n NUM", "--num-words=NUM", Integer,
-          "Number of words in passphrase #{Default.number_range}",
+          "Number of words in passphrase #{default_number_range}",
           "(default: #{default_number_of_words})") do |n|
             options[:number_of_words] = n
           end
