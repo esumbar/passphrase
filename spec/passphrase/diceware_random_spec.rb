@@ -93,10 +93,6 @@ module Passphrase
         @random = DicewareRandom.new(:use_random_org)
       end
 
-      it "initially has a zero random.org request count" do
-        expect(DicewareRandom.random_org_requests).to eq(0)
-      end
-
       it "increments the random.org request count on indices()" do
         expect {
           @random.indices(4, 15)

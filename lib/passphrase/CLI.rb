@@ -14,7 +14,7 @@ module Passphrase
     #   given by ARGV (may be empty)
     # @return [void]
     def self.parse(args)
-      options = Default.options
+      options = Default.options.clone
 
       default_number_of_words = Default.options[:number_of_words]
       default_random_org = Default.options[:use_random_org] ? "--random-org" : "--no-random-org"
