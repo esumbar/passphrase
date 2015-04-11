@@ -27,9 +27,9 @@ module Passphrase
       # x = a.x
       # x[:b] = 99
       # p a.x        #=> {:a=>1, :b=>99}
-      # Need to clone the defaults hash otherwise parsing could alter its
-      # contents. Although this causes no harm in the command-line tool, it
-      # causes havoc when the test suite is run.
+      # Therefore, need to clone the defaults hash otherwise parsing could
+      # alter its contents. Although this causes no harm in the command-line
+      # tool, it causes havoc when the test suite is run.
       options = Default.options.clone
 
       default_number_of_words = Default.options[:number_of_words]
