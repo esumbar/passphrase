@@ -10,7 +10,6 @@ or programmatically,
 ```ruby
 require "passphrase"
 p = Passphrase::Passphrase.new(number_of_words: 4)
-p.generate
 passphrase = p.passphrase
 ```
 
@@ -61,7 +60,6 @@ require "passphrase"
 
 # generate a passphrase with default options
 p = Passphrase::Passphrase.new
-p.generate
 puts "passphrase: #{p}"
 puts "passphrase internals: #{p.inspect}"
 
@@ -158,9 +156,7 @@ bin/passphrase`. You can also experiment with the library in irb. For example,
 
     $ irb -Ilib -rpassphrase
     >> p = Passphrase::Passphrase.new(number_of_words: 3)
-    => {:passphrase=>"", :number_of_words=>3, :use_random_org=>nil, :word_origins=>{}}
-    >> p.generate
-    => {:passphrase=>"bolt flanella ininaen", :number_of_words=>3,...}
+    => {:passphrase=>"bolt flanella ininaen", :number_of_words=>3, ...}
     >> p.passphrase
     => "bolt flanella ininaen"
 
