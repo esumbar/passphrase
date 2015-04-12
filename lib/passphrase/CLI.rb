@@ -50,7 +50,7 @@ module Passphrase
             options[:passwordize] = p
         end
         opts.on(:NONE, "-r", "--[no-]random-org",
-          "Use random.org to generate random numbers",
+          "Use RANDOM.ORG to generate random numbers",
           "(default: #{default_random_org})") do |r|
             options[:use_random_org] = r
         end
