@@ -44,6 +44,11 @@ module Passphrase
           "(default: #{default_number_of_words})") do |n|
             options[:number_of_words] = n
           end
+        opts.on(:NONE, "-p", "--[no-]passwordize",
+          "Add one cap, one num, and one special char",
+          "(default: TBD)") do |p|
+            options[:passwordize] = p
+        end
         opts.on(:NONE, "-r", "--[no-]random-org",
           "Use random.org to generate random numbers",
           "(default: #{default_random_org})") do |r|
