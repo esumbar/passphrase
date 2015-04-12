@@ -29,6 +29,11 @@ module Passphrase
       CLI.parse(["-n", "3"])
     end
 
+    it "does not emit an error when option -p is supplied" do
+      expect(CLI).not_to receive(:handle_error)
+      CLI.parse(["-p"])
+    end
+
     it "does not emit an error when option -r is supplied" do
       expect(CLI).not_to receive(:handle_error)
       CLI.parse(["-r"])
