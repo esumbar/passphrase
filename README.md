@@ -130,7 +130,7 @@ some "words" with numerical and punctuation characters. To the best of my
 knowledge, no word appears more than once in this set of wordlists.
 
 The _dice_ in Diceware refers to the act of rolling a die to achieve
-randomness. A sequence of five consecutive rolls has 7776 (6<sup>5</sup>)
+randomness. A sequence of five consecutive rolls has 7776 (or 6<sup>5</sup>)
 possible outcomes. Each combination maps to one line in a given wordlist, and
 each line, in turn, is composed of between 1 and 15 words (depending on the
 language, the average being 5).
@@ -141,7 +141,7 @@ Therefore, to select a word, Passphrase
 2. randomly selects one of 7776 lines from the corresponding wordlist
 3. randomly selects one word from the corresponding line
 
-This leads to roughly 2<sup>66</sup> (10<sup>28</sup>) possible five-word
+This leads to roughly 2<sup>66</sup> (or 10<sup>28</sup>) possible five-word
 passphrases, for example.
 
 Passphrase simulates the rolls of a die by using random numbers from one of
@@ -155,7 +155,7 @@ A typical passphrase will not satisfy password policies that require the use
 of upper case letters, numbers, and special characters (~, !, and the like).
 Therefore, Passphrase gives you the option to replace three randomly selected
 characters in a generated passphrase with one random upper case letter
-([A-Z]), one random integer ([0-9]), and one random special character. Spaces
+`[A-Z]`, one random integer `[0-9]`, and one random special character. Spaces
 are not usually allowed either, so they are replaced with underscores as part
 of this process.
 
