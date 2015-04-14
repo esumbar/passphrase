@@ -49,6 +49,10 @@ module Passphrase
       before do
         @passphrase = Passphrase.new
       end
+
+      it "returns a passphrase of type String" do
+        expect(@passphrase.passphrase).to be_an_instance_of(String)
+      end
       
       it "returns a passphrase with the default number of words" do
         number_of_words = @passphrase.passphrase.split.length
@@ -65,6 +69,10 @@ module Passphrase
     context "initialized to generate a passphrase with 1 word" do
       before do
         @passphrase = Passphrase.new(number_of_words: 1)
+      end
+
+      it "returns a passphrase of type String" do
+        expect(@passphrase.passphrase).to be_an_instance_of(String)
       end
 
       it "returns a passphrase with one word" do
@@ -87,6 +95,10 @@ module Passphrase
 
         it "returns itself" do
           expect(@result).to equal(@passphrase)
+        end
+
+        it "returns a passphrase of type String" do
+          expect(@result.passphrase).to be_an_instance_of(String)
         end
 
         it "contains a passphrase with one word" do
