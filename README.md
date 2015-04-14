@@ -152,12 +152,12 @@ network access, it is susceptible to network problems, and is also slower.
 
 ### Passwords
 A typical passphrase will not satisfy password policies that require the use
-of upper case letters, numbers, and special characters (`~`, `!`, and the
-like). Therefore, Passphrase gives you the option to replace three randomly
-selected characters in a generated passphrase with one random upper case
-letter (`[A-Z]`), one random integer (`[0-9]`), and one random special
-character. Spaces are not usually allowed either, so they are replaced with
-underscores as part of this process.
+of upper case letters, numbers, and special characters (~, !, and the like).
+Therefore, Passphrase gives you the option to replace three randomly selected
+characters in a generated passphrase with one random upper case letter
+([A-Z]), one random integer ([0-9]), and one random special character. Spaces
+are not usually allowed either, so they are replaced with underscores as part
+of this process.
 
 ## Contributing to Passphrase
 After forking the [repository on

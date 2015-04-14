@@ -5,11 +5,11 @@ project adheres to [Semantic Versioning](http://semver.org/).
 ## UNRELEASED
 ### Added
 - Added SHA256 checksum calculation to rake_helper.rb.
-- Added :use_random_org key to Passphrase#inspect.
+- Added `:use_random_org` key to Passphrase#inspect.
 - Added `--passwordize|-p` option to convert a passphrase into a password.
 
 ### Changed
-- Made :number_of_words an attribute of the Passphrase class.
+- Made `number_of_words` an attribute of the Passphrase class.
 - Generate a passphrase when a Passphrase object is instantiated.
 - The passphrase attribute is now an instance of PassphraseString which
   encapsulates the `#to_password` method.
