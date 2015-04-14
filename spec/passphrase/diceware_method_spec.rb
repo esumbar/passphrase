@@ -50,9 +50,17 @@ module Passphrase
           )
         end
 
-        it "each array is of size given by the number of words specified" do
+        it "each array contains :number_of_words elements" do
           @result.each do |result|
             expect(result.size).to eq(@number_of_words)
+          end
+        end
+
+        it "each array contains String elements" do
+          @result.each do |result|
+            result.each do |element|
+              expect(element).to be_an_instance_of(String)
+            end
           end
         end
       end
