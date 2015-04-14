@@ -15,7 +15,7 @@ module Passphrase
     # @return [String] a new String that is the passwordized version of the
     #   passphrase
     def to_password
-      @scratch = self.clone
+      @scratch = self.gsub(/\s/, "_")
       capital_index, number_index, special_index = @random.indices(3, @scratch.length)
       select_and_substitute_capital_letter(capital_index)
       select_and_substitute_number(number_index)
