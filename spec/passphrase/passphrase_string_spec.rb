@@ -20,7 +20,7 @@ module Passphrase
         expect(@passphrase_string).to respond_to(:passwordize).with(0).arguments
       end
 
-      context "#passwordize" do
+      describe "#passwordize" do
         before do
           @passwordized_string = @passphrase_string.passwordize
         end

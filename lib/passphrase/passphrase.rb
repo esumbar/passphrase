@@ -34,7 +34,7 @@ module Passphrase
     # @return [self] the Passphrase object
     def generate
       @languages, @die_rolls, @words = DicewareMethod.run(@options)
-      @passphrase = @words.join(" ")
+      @passphrase = PassphraseString.new(@words.join(" "), @options[:use_random_org])
       self
     end
 

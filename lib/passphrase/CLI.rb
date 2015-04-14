@@ -68,7 +68,9 @@ module Passphrase
       begin
         parser.parse!(args)
         validate_number_of_words(options)
-        puts Passphrase.new(options)
+        passphrase = Passphrase.new(options).passphrase
+        passphrase = passphrase.passwordize if options[:passwordize]
+        puts passphrase
       rescue OptionParser::InvalidOption => e
         handle_error(e)
       rescue OptionParser::MissingArgument => e

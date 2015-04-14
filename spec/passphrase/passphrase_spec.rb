@@ -50,8 +50,8 @@ module Passphrase
         @passphrase = Passphrase.new
       end
 
-      it "returns a passphrase of type String" do
-        expect(@passphrase.passphrase).to be_an_instance_of(String)
+      it "returns a passphrase of type PassphraseString" do
+        expect(@passphrase.passphrase).to be_an_instance_of(PassphraseString)
       end
       
       it "returns a passphrase with the default number of words" do
@@ -71,8 +71,8 @@ module Passphrase
         @passphrase = Passphrase.new(number_of_words: 1)
       end
 
-      it "returns a passphrase of type String" do
-        expect(@passphrase.passphrase).to be_an_instance_of(String)
+      it "returns a passphrase of type PassphraseString" do
+        expect(@passphrase.passphrase).to be_an_instance_of(PassphraseString)
       end
 
       it "returns a passphrase with one word" do
@@ -97,8 +97,8 @@ module Passphrase
           expect(@result).to equal(@passphrase)
         end
 
-        it "returns a passphrase of type String" do
-          expect(@result.passphrase).to be_an_instance_of(String)
+        it "returns a passphrase of type PassphraseString" do
+          expect(@result.passphrase).to be_an_instance_of(PassphraseString)
         end
 
         it "contains a passphrase with one word" do

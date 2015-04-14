@@ -46,6 +46,10 @@ module Passphrase
       it "each one in the range 0...15" do
         expect(@result).to all be_between(0, 14)
       end
+
+      it "produces a different result when called a second time" do
+        expect(@random.indices(4, 15)).not_to eq(@result)
+      end
     end
 
     describe "#die_rolls(6)" do
