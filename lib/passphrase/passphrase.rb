@@ -28,7 +28,7 @@ module Passphrase
     # resulting arrays are accumulated into instance variables. The words
     # array is formatted into a single passphrase string and stored in another
     # instance variable. The method returns itself to allow method chaining.
-    # @return [self] a Passphrase object
+    # @return [self] the Passphrase object
     def generate
       @languages, @die_rolls, @words = DicewareMethod.run(@options)
       @passphrase = @words.join(" ")
@@ -37,7 +37,7 @@ module Passphrase
 
     # A predicate method that returns true if the Passphrase object is
     # initialized to use RANDOM.ORG
-    # @return [Boolean] returns true of RANDOM.ORG is being used
+    # @return [Boolean] returns true if RANDOM.ORG is being used
     def using_random_org?
       @options[:use_random_org]
     end

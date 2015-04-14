@@ -82,7 +82,7 @@ module Passphrase
 
     context "initialized by default to use the local Ruby random number generator" do
       before do
-        @random = DicewareRandom.new
+        @random = DicewareRandom.new(false)
       end
       
       include_examples "DicewareRandom object"
@@ -90,7 +90,7 @@ module Passphrase
 
     context "initialized to use random numbers from RANDOM.ORG" do
       before do
-        @random = DicewareRandom.new(:use_random_org)
+        @random = DicewareRandom.new(true)
       end
 
       it "increments the random.org request count on indices()" do
