@@ -70,7 +70,7 @@ module Passphrase
         validate_number_of_words(options)
         passphrase = Passphrase.new(options).passphrase
         puts passphrase
-        puts passphrase.passwordize if options[:passwordize]
+        puts passphrase.to_password if options[:passwordize]
       rescue OptionParser::InvalidOption => e
         handle_error(e)
       rescue OptionParser::MissingArgument => e

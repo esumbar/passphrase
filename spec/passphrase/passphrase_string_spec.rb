@@ -16,13 +16,13 @@ module Passphrase
         expect(@passphrase_string.length).to eq(26)
       end
 
-      it "responds to the passwordize() method with zero arguments" do
-        expect(@passphrase_string).to respond_to(:passwordize).with(0).arguments
+      it "responds to the to_password() method with zero arguments" do
+        expect(@passphrase_string).to respond_to(:to_password).with(0).arguments
       end
 
-      describe "#passwordize" do
+      describe "#to_password" do
         before do
-          @passwordized_string = @passphrase_string.passwordize
+          @passwordized_string = @passphrase_string.to_password
         end
 
         it "returns an ordinary String" do
