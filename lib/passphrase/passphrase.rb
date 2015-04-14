@@ -1,3 +1,6 @@
+require "passphrase/diceware_method"
+require "passphrase/passphrase_string"
+
 module Passphrase
   # This is the main class of the Passphrase library for generating
   # passphrases. It's initialized with a two-element hash that specifies the

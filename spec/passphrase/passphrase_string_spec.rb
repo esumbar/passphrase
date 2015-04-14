@@ -1,5 +1,4 @@
-require "passphrase/passphrase_string"
-require "passphrase/diceware_random"
+require "passphrase"
 
 module Passphrase
   RSpec.describe PassphraseString, "subclass of String class" do
