@@ -1,9 +1,7 @@
 module Passphrase
   # This subclass of String implements the {#passwordize} instance method for
   # substituting a capital letter, number, and special character into a
-  # passphrase. Note that although #passwordize can be called on a
-  # PassphraseString object any number of times, the result will not change
-  # after the first call.
+  # passphrase.
   class PassphraseString < String
     # @param passphrase [String] the passphrase as an ordinary String object
     # @param use_random_org [Boolean] a flag that triggers the use of
@@ -14,34 +12,34 @@ module Passphrase
       @random = DicewareRandom.new(use_random_org)
     end
     
-    # @return [PassphraseString] a new PassphraseString that has been
-    #   passwordized
+    # @return [String] a new String that is the passwordized version of the
+    #   passphrase
     def passwordize
       @scratch = self.clone
       capital_index, number_index, special_index = @random.indices(3, @scratch.length)
-      substitute_capital_letter(capital_index)
-      substitute_number(number_index)
-      substitute_special_character(special_index)
-      @scratch
+      select_and_substitute_capital_letter(capital_index)
+      select_and_substitute_number(number_index)
+      select_and_substitute_special_character(special_index)
+      String.new(@scratch)
     end
 
     private
 
-    def substitute_capital_letter(random_index)
+    def select_and_substitute_capital_letter(random_index)
       # Just in case the passphrase already includes a capital letter.
       return if /[A-Z]/ =~ @scratch
       capital_letter = ("A".."Z").to_a.sample
       substitute(capital_letter, random_index)
     end
 
-    def substitute_number(random_index)
+    def select_and_substitute_number(random_index)
       # The Diceware wordlist includes "words" that include numbers.
       return if /[0-9]/ =~ @scratch
       number = ("0".."9").to_a.sample
       substitute(number, random_index)
     end
 
-    def substitute_special_character(random_index)
+    def select_and_substitute_special_character(random_index)
       # The Diceware wordlist includes "words" that include special characters.
       return if /[~!#\$%\^&\*\(\)\-=\+\[\]\\\{\}:;"'<>\?\/]/ =~ @scratch
       special_character = %w( ~ ! # $ % ^ & * \( \) - = + [ ] \\ { } : ; " ' < > ? / ).sample

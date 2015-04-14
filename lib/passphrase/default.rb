@@ -10,6 +10,6 @@ module Passphrase
     end
 
     @options = { number_of_words: 5, passwordize: nil, use_random_org: nil }
-    @number_range = (3..10)
+    @number_range = (2..10)
   end
 end

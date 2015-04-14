@@ -25,33 +25,29 @@ module Passphrase
           @passwordized_string = @passphrase_string.passwordize
         end
 
-        it "returns a PassphraseString" do
-          expect(@passwordized_string).to be_an_instance_of(PassphraseString)
+        it "returns an ordinary String" do
+          expect(@passwordized_string).to be_an_instance_of(String)
         end
 
-        it "is not the same object as self" do
+        it "returns a String that is not the same object as the PassphraseString" do
           expect(@passwordized_string).not_to equal(@passphrase_string)
         end
 
-        it "has the same length as self" do
+        it "returns a String that has the same length as the PassphraseString" do
           expect(@passwordized_string.length).to eq(@passphrase_string.length)
         end
 
-        it "contains at least one captial letter" do
+        it "returns a String that contains at least one captial letter" do
           expect(@passwordized_string).to match(/[A-Z]/)
         end
 
-        it "contains at least one number" do
+        it "returns a String that contains at least one number" do
           expect(@passwordized_string).to match(/[0-9]/)
         end
 
-        it "contains at least one special character" do
+        it "returns a String that contains at least one special character" do
           special_character = /[~!#\$%\^&\*\(\)\-=\+\[\]\\\{\}:;"'<>\?\/]/
           expect(@passwordized_string).to match(special_character)
-        end
-
-        it "does not produce different results when called multiple times" do
-          expect(@passwordized_string.passwordize).to eq(@passwordized_string)
         end
       end
     end
