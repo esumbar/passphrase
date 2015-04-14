@@ -12,8 +12,7 @@ require "passphrase"
 p = Passphrase::Passphrase.new(number_of_words: 4)
 passphrase = p.passphrase
 ```
-
-Eliminate the spaces between words to use the result as a potential password.
+Passphrase also has the capability to generate passwords (indirectly).
 
 ## Installation
 The Passphrase command-line tool and library can be installed with
@@ -42,6 +41,8 @@ this case `sqlite3`, which is not signed, from the verification process.
     Usage: passphrase [options]
         -n, --num-words=NUM           Number of words in passphrase 3..10
                                       (default: 5)
+        -p, --[no-]passwordize        Add one cap, one num, and one special char
+                                      (default: --no-passwordize)
         -r, --[no-]random-org         Use RANDOM.ORG to generate random numbers
                                       (default: --no-random-org)
         -h, --help                    Show this message
@@ -52,6 +53,10 @@ this case `sqlite3`, which is not signed, from the verification process.
 
     $ passphrase -n 4
     apaisado vermouth seemag ebelik
+
+    $ passphrase -n 3 -p
+    pothvati alewives escatima
+    pothvati_alewiNes_e&cat5ma
 
 ### Ruby library
 
@@ -75,9 +80,15 @@ passphrase_array = Array.new(100)
 Passphrase::Passphrase.new(number_of_words: 6) do |p|
   passphrase_array.map! { |e| p.generate.passphrase }
 end
+
+# generate a password
+p = Passphrase::Passphrase.new(number_of_words: 3)
+passphrase = p.passphrase
+password   = passphrase.to_password
 ```
 
 ## Background
+### Diceware Method
 Passphrase implements the [Diceware
 Method](http://world.std.com/~reinhold/diceware.html) which constructs a
 passphrase by randomly selecting words from a predefined list of more-or-less
@@ -115,8 +126,8 @@ SQLite 3 database file).
 
 Except in the original Diceware list, all words are lower case, comprised of
 characters from the ascii set `[a-z]`. The original Diceware list includes
-some "words" with numerical and punctuation characters. No word appears more
-than once in this set of wordlists.
+some "words" with numerical and punctuation characters. To the best of my
+knowledge, no word appears more than once in this set of wordlists.
 
 The _dice_ in Diceware refers to the act of rolling a die to achieve
 randomness. A sequence of five consecutive rolls has 7776 (6<sup>5</sup>)
@@ -139,8 +150,16 @@ have the option of requesting random numbers from
 [RANDOM.ORG](http://www.random.org). However, because RANDOM.ORG depends on
 network access, it is susceptible to network problems, and is also slower.
 
+### Passwords
+A typical passphrase will not satisfy password policies that require the use
+of upper case letters, numbers, and special characters (`~`, `!`, and the
+like). Therefore, Passphrase gives you the option to replace three randomly
+selected characters in a generated passphrase with one random upper case
+letter (`[A-Z]`), one random integer (`[0-9]`), and one random special
+character. Spaces are not usually allowed either, so they are replaced with
+underscores as part of this process.
+
 ## Contributing to Passphrase
-### Getting started
 After forking the [repository on
 GitHub](https://github.com/esumbar/passphrase), go to your local copy of the
 repository  and execute `bundle install` to ensure that all development gems
@@ -156,18 +175,13 @@ bin/passphrase`. You can also experiment with the library in irb. For example,
 
     $ irb -Ilib -rpassphrase
     >> p = Passphrase::Passphrase.new(number_of_words: 3)
-    => {:passphrase=>"bolt flanella ininaen", :number_of_words=>3, ...}
+    => {:passphrase=>"jazzy vannier viscount", :number_of_words=>3, ... }
     >> p.passphrase
-    => "bolt flanella ininaen"
+    => "jazzy vannier viscount"
+    >> p.passphrase.to_password
+    => "jazz{_2annier_vBscount"
 
 Run the tests with `rake spec`.
-
-### Future enhancements
-In order to make passphrases more acceptable as passwords, a feature could be
-added to the library to upcase a random letter, replace a random alphabetic
-character with a numeric character (if one does not already exist), and mix in
-a special character, like "`$`" or "`%`" etc. The command-line option could be
-called `--passwordize|-p`.
 
 ## Changelog
 See {file:CHANGELOG.md} for a list of changes.

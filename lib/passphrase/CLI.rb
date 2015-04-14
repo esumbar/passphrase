@@ -34,6 +34,7 @@ module Passphrase
       options = Default.options.clone
 
       default_number_of_words = Default.options[:number_of_words]
+      default_passwordize = Default.options[:passwordize] ? "--passwordize" : "--no-passwordize"
       default_random_org = Default.options[:use_random_org] ? "--random-org" : "--no-random-org"
       default_number_range = Default.number_range
 
@@ -44,8 +45,13 @@ module Passphrase
           "(default: #{default_number_of_words})") do |n|
             options[:number_of_words] = n
           end
+        opts.on(:NONE, "-p", "--[no-]passwordize",
+          "Add one cap, one num, and one special char",
+          "(default: #{default_passwordize})") do |p|
+            options[:passwordize] = p
+        end
         opts.on(:NONE, "-r", "--[no-]random-org",
-          "Use random.org to generate random numbers",
+          "Use RANDOM.ORG to generate random numbers",
           "(default: #{default_random_org})") do |r|
             options[:use_random_org] = r
         end
@@ -62,7 +68,9 @@ module Passphrase
       begin
         parser.parse!(args)
         validate_number_of_words(options)
-        puts Passphrase.new(options)
+        passphrase = Passphrase.new(options).passphrase
+        puts passphrase
+        puts passphrase.to_password if options[:passwordize]
       rescue OptionParser::InvalidOption => e
         handle_error(e)
       rescue OptionParser::MissingArgument => e

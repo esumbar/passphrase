@@ -1,3 +1,6 @@
+require "passphrase/diceware_method"
+require "passphrase/passphrase_string"
+
 module Passphrase
   # This is the main class of the Passphrase library for generating
   # passphrases. It's initialized with a two-element hash that specifies the
@@ -28,16 +31,16 @@ module Passphrase
     # resulting arrays are accumulated into instance variables. The words
     # array is formatted into a single passphrase string and stored in another
     # instance variable. The method returns itself to allow method chaining.
-    # @return [self] a Passphrase object
+    # @return [self] the Passphrase object
     def generate
       @languages, @die_rolls, @words = DicewareMethod.run(@options)
-      @passphrase = @words.join(" ")
+      @passphrase = PassphraseString.new(@words.join(" "), @options[:use_random_org])
       self
     end
 
     # A predicate method that returns true if the Passphrase object is
     # initialized to use RANDOM.ORG
-    # @return [Boolean] returns true of RANDOM.ORG is being used
+    # @return [Boolean] returns true if RANDOM.ORG is being used
     def using_random_org?
       @options[:use_random_org]
     end
