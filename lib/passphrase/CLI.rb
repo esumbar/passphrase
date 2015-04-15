@@ -14,20 +14,44 @@ module Passphrase
     #   given by ARGV (may be empty)
     # @return [void]
     def self.parse(args)
-      options = Default.options
+      # Gotcha:
+      # The contents of an instance variable can be changed outside the class
+      # through a reader attribute. For example,
+      #   class A
+      #     attr_reader :x
+      #     def initialize
+      #       @x = { a: 1, b: 2 }
+      #     end
+      #   end
+      #   a = A.new
+      #   p a.x        #=> {:a=>1, :b=>2}
+      #   x = a.x
+      #   x[:b] = 99
+      #   p a.x        #=> {:a=>1, :b=>99}
+      # Therefore, need to clone the default hash otherwise parsing could
+      # alter the hash's contents. Although this causes no harm in the
+      # command-line tool, it causes havoc in the test suite.
+      options = Default.options.clone
 
       default_number_of_words = Default.options[:number_of_words]
+      default_passwordize = Default.options[:passwordize] ? "--passwordize" : "--no-passwordize"
       default_random_org = Default.options[:use_random_org] ? "--random-org" : "--no-random-org"
+      default_number_range = Default.number_range
 
       parser = OptionParser.new do |opts|
         opts.banner = "Usage: passphrase [options]"
         opts.on(:REQUIRED, "-n NUM", "--num-words=NUM", Integer,
-          "Number of words in passphrase #{Default.number_range}",
+          "Number of words in passphrase #{default_number_range}",
           "(default: #{default_number_of_words})") do |n|
             options[:number_of_words] = n
           end
+        opts.on(:NONE, "-p", "--[no-]passwordize",
+          "Add one cap, one num, and one special char",
+          "(default: #{default_passwordize})") do |p|
+            options[:passwordize] = p
+        end
         opts.on(:NONE, "-r", "--[no-]random-org",
-          "Use random.org to generate random numbers",
+          "Use RANDOM.ORG to generate random numbers",
           "(default: #{default_random_org})") do |r|
             options[:use_random_org] = r
         end
@@ -44,7 +68,9 @@ module Passphrase
       begin
         parser.parse!(args)
         validate_number_of_words(options)
-        puts Passphrase.new(options).generate
+        passphrase = Passphrase.new(options).passphrase
+        puts passphrase
+        puts passphrase.to_password if options[:passwordize]
       rescue OptionParser::InvalidOption => e
         handle_error(e)
       rescue OptionParser::MissingArgument => e

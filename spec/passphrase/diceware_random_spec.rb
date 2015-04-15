@@ -46,6 +46,10 @@ module Passphrase
       it "each one in the range 0...15" do
         expect(@result).to all be_between(0, 14)
       end
+
+      it "produces a different result when called a second time" do
+        expect(@random.indices(4, 15)).not_to eq(@result)
+      end
     end
 
     describe "#die_rolls(6)" do
@@ -82,7 +86,7 @@ module Passphrase
 
     context "initialized by default to use the local Ruby random number generator" do
       before do
-        @random = DicewareRandom.new
+        @random = DicewareRandom.new(false)
       end
       
       include_examples "DicewareRandom object"
@@ -90,11 +94,7 @@ module Passphrase
 
     context "initialized to use random numbers from RANDOM.ORG" do
       before do
-        @random = DicewareRandom.new(:use_random_org)
-      end
-
-      it "initially has a zero random.org request count" do
-        expect(DicewareRandom.random_org_requests).to eq(0)
+        @random = DicewareRandom.new(true)
       end
 
       it "increments the random.org request count on indices()" do

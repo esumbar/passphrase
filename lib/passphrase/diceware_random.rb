@@ -19,7 +19,7 @@ module Passphrase
 
     # @param use_random_org [Boolean] a flag that triggers the use of
     #   RANDOM.ORG for generating random numbers
-    def initialize(use_random_org=nil)
+    def initialize(use_random_org)
       @random_org_uri = "https://www.random.org"
       use_random_org ? setup_remote_generator : setup_local_generator
     end

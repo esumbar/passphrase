@@ -3,6 +3,15 @@ require "optparse"
 
 module Passphrase
   RSpec.describe CLI, "implements the command line interface" do
+    before do
+      @saved_stdout = $stdout
+      $stdout = StringIO.new
+    end
+
+    after(:each) do
+      $stdout = @saved_stdout
+    end
+
     it "responds to class method parse() with one argument" do
       expect(CLI).to respond_to(:parse).with(1).argument
     end
@@ -15,12 +24,35 @@ module Passphrase
       expect(CLI).not_to respond_to(:handle_error)
     end
 
+    it "does not emit an error when option -n 3 is supplied" do
+      expect(CLI).not_to receive(:handle_error)
+      CLI.parse(["-n", "3"])
+    end
+
+    it "does not emit an error when option -p is supplied" do
+      expect(CLI).not_to receive(:handle_error)
+      CLI.parse(["-p"])
+    end
+
+    it "does not emit an error when option -r is supplied" do
+      expect(CLI).not_to receive(:handle_error)
+      CLI.parse(["-r"])
+    end
+
+    it "exits when option -h is supplied" do
+      expect { CLI.parse(["-h"]) }.to raise_error(SystemExit)
+    end
+
+    it "exits when option -v is supplied" do
+      expect { CLI.parse(["-v"]) }.to raise_error(SystemExit)
+    end
+
     it "emits an error when an invalid option is supplied" do
       # For some reason, :handle_error doesn't need to be stubbed
       expect(CLI).to receive(:handle_error)
         .with(kind_of(OptionParser::InvalidOption))
-      bad_option = ["-x"]
-      CLI.parse(bad_option)
+      invalid_option = ["-x"]
+      CLI.parse(invalid_option)
     end
 
     it "emits an error when a mandatory argument is missing" do

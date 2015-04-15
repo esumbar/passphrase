@@ -9,7 +9,7 @@ module Passphrase
       attr_reader :number_range
     end
 
-    @options = { number_of_words: 5, use_random_org: nil }
+    @options = { number_of_words: 5, passwordize: nil, use_random_org: nil }
     @number_range = (3..10)
   end
 end

@@ -1,3 +1,6 @@
+require "passphrase/diceware_method"
+require "passphrase/passphrase_string"
+
 module Passphrase
   # This is the main class of the Passphrase library for generating
   # passphrases. It's initialized with a two-element hash that specifies the
@@ -12,14 +15,15 @@ module Passphrase
     # @return [String] the passphrase string
     attr_reader :passphrase
 
+    # @return [Integer] the number of words in the passphrase
+    attr_reader :number_of_words
+
     # @param options [Hash] characteristics for a new Passphrase object
     # @yieldparam obj [self] the Passphrase object
     def initialize(options={})
       @options = Default.options.merge(options)
-      @passphrase = ""
-      @languages = []
-      @die_rolls = []
-      @words = []
+      @number_of_words = @options[:number_of_words]
+      generate
       yield self if block_given?
     end
 
@@ -27,23 +31,16 @@ module Passphrase
     # resulting arrays are accumulated into instance variables. The words
     # array is formatted into a single passphrase string and stored in another
     # instance variable. The method returns itself to allow method chaining.
-    # @return [self] a Passphrase object
+    # @return [self] the Passphrase object
     def generate
       @languages, @die_rolls, @words = DicewareMethod.run(@options)
-      @passphrase = @words.join(" ")
+      @passphrase = PassphraseString.new(@words.join(" "), @options[:use_random_org])
       self
-    end
-
-    # This virtual attribute accessor returns the number of words in the
-    # generated passphrase.
-    # @return [Integer] the number of words in the passphrase
-    def number_of_words
-      @words.size
     end
 
     # A predicate method that returns true if the Passphrase object is
     # initialized to use RANDOM.ORG
-    # @return [Boolean] returns true of RANDOM.ORG is being used
+    # @return [Boolean] returns true if RANDOM.ORG is being used
     def using_random_org?
       @options[:use_random_org]
     end
@@ -51,15 +48,16 @@ module Passphrase
     # String representation of a Passphrase object
     # @return [String] the passphrase string
     def to_s
-      @passphrase
+      passphrase
     end
 
     # Returns details for the Passphrase object as a hash.
     # @return [Hash] the details of a Passphrase object
     def inspect
       {
-        passphrase: @passphrase,
-        number_of_words: @words.size,
+        passphrase: passphrase,
+        number_of_words: number_of_words,
+        use_random_org: using_random_org?,
         word_origins: word_origins
       }
     end

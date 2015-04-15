@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## Version 1.1.0 - 2015-04-14
+### Added
+- Added SHA256 checksum calculation to rake_helper.rb.
+- Added `:use_random_org` key to Passphrase#inspect.
+- Added `--passwordize|-p` option to convert a passphrase into a password.
+
+### Changed
+- Made `number_of_words` an attribute of the Passphrase class.
+- Generate a passphrase when a Passphrase object is instantiated.
+- The passphrase attribute is now an instance of PassphraseString which
+  encapsulates the `#to_password` method.
+
 ## Version 1.0.0 - 2015-04-06
 This release is a complete re-write. None of the code from the previous
 release was retained.

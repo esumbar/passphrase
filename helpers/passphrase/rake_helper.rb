@@ -20,10 +20,14 @@ module Passphrase
         checksum_dir = "checksum"
         FileUtils.mkdir_p(checksum_dir)
         built_gem_path = "pkg/#{gemspec.name}-#{gemspec.version}.gem"
-        checksum = Digest::SHA512.new.hexdigest(File.read(built_gem_path))
-        checksum_path = "#{checksum_dir}/#{gemspec.name}-#{gemspec.version}.gem.sha512"
-        File.open(checksum_path, "w" ) { |f| f.write(checksum) }
-        puts "Checksum saved to #{checksum_path}."
+        checksums = {}
+        checksums['256'] = Digest::SHA256.new.hexdigest(File.read(built_gem_path))
+        checksums['512'] = Digest::SHA512.new.hexdigest(File.read(built_gem_path))
+        checksums.each do |size, digest|
+          path = "#{checksum_dir}/#{gemspec.name}-#{gemspec.version}.gem.sha#{size}"
+          File.open(path, "w") { |f| f.write(digest) }
+          puts "Checksum saved to #{path}."
+        end
       end
 
       desc "Create and populate the wordlist database words.sqlite3"

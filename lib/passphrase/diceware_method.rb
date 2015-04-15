@@ -1,4 +1,7 @@
 require "sqlite3"
+require "passphrase/diceware_random"
+require "passphrase/language_query"
+require "passphrase/word_query"
 
 module Passphrase
   # This class implements the Diceware Method for generating a passphrase. It
