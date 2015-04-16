@@ -1,5 +1,5 @@
 module Passphrase
-  # This subclass of String implements the {#passwordize} instance method for
+  # This subclass of String implements the {#to_password} instance method for
   # substituting a capital letter, number, and special character into a
   # passphrase.
   class PassphraseString < String
