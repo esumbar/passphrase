@@ -1,4 +1,5 @@
 require "optparse"
+require "passphrase/wordlist_database"
 
 module Passphrase
   # The CLI class encapsulates a simple command line interface to the
@@ -38,13 +39,18 @@ module Passphrase
       default_random_org = Default.options[:use_random_org] ? "--random-org" : "--no-random-org"
       default_number_range = Default.number_range
 
-      parser = OptionParser.new do |opts|
+      parser = OptionParser.new(nil, 28, " " * 4) do |opts|
         opts.banner = "Usage: passphrase [options]"
+        opts.on(:OPTIONAL, "-l", "--languages=LANG1,...", Array,
+          "Specify languages to use, none for a listing",
+          "(default: --languages=all)") do |l|
+            options[:languages] = (l || [])
+        end
         opts.on(:REQUIRED, "-n NUM", "--num-words=NUM", Integer,
           "Number of words in passphrase #{default_number_range}",
-          "(default: #{default_number_of_words})") do |n|
+          "(default: --num-words=#{default_number_of_words})") do |n|
             options[:number_of_words] = n
-          end
+        end
         opts.on(:NONE, "-p", "--[no-]passwordize",
           "Add one cap, one num, and one special char",
           "(default: #{default_passwordize})") do |p|
@@ -67,15 +73,15 @@ module Passphrase
 
       begin
         parser.parse!(args)
+        display_languages(options)
         validate_number_of_words(options)
         passphrase = Passphrase.new(options).passphrase
-        puts passphrase
-        puts passphrase.to_password if options[:passwordize]
+        print_out(passphrase, options)
       rescue OptionParser::InvalidOption => e
         handle_error(e)
       rescue OptionParser::MissingArgument => e
         handle_error(e)
-      # gracefully handle exit(0) from --help and --version options
+      # Gracefully handle exit(0) from --help, --version, and --language options
       rescue SystemExit => e
         exit(e.status)
       rescue Exception => e
@@ -83,11 +89,23 @@ module Passphrase
       end
     end
 
+    def self.display_languages(options)
+      if options[:languages].empty?
+        puts WordlistDatabase.connect.from(:languages).all
+        exit(1)
+      end
+    end
+
     def self.validate_number_of_words(options)
       number_of_words = options[:number_of_words]
       unless Default.number_range.include?(number_of_words)
-        raise "number of words out of range #{Default.number_range}"
+        raise "Number of words out of range #{Default.number_range}"
       end
+    end
+
+    def self.print_out(passphrase, options)
+      puts passphrase
+      puts passphrase.to_password if options[:passwordize]
     end
 
     def self.handle_error(error)
@@ -96,7 +114,10 @@ module Passphrase
     end
 
     class << self
-      private :validate_number_of_words, :handle_error
+      private :display_languages
+      private :validate_number_of_words
+      private :print_out
+      private :handle_error
     end
   end
 end
