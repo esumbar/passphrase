@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
-## UNRELEASED
+## Version 1.2.0 - 2015-04-17
 ### Added
 - List available languages.
 - Added option `--languages|-l` to select a subset of languages.
