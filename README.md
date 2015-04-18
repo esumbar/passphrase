@@ -13,6 +13,7 @@ require "passphrase"
 p = Passphrase::Passphrase.new(number_of_words: 4)
 passphrase = p.passphrase
 ```
+
 Passphrase also has the capability to generate passwords (indirectly).
 
 ## Installation
@@ -21,6 +22,7 @@ The Passphrase command-line tool and library can be installed with
 ```bash
 $ gem install passphrase
 ```
+
 However, because the gem is cryptographically signed to prevent tampering, the
 preferred installation command should include the `--trust-policy` security
 option, which causes the gem to be verified before being installed. To invoke
@@ -30,13 +32,16 @@ trusted certificates, as follows.
 ```bash
 $ gem cert --add <(curl -Ls https://raw.githubusercontent.com/esumbar/passphrase/master/certs/esumbar.pem)
 ```
+
 Finally, specify the appropriate security level when installing.
 
 ```bash
 $ gem install passphrase --trust-policy MediumSecurity
 ```
+
 Using `MediumSecurity` rather than `HighSecurity` omits dependent gems that
-are not signed from the verification process, in this case `sqlite3`.
+are not signed from the verification process. Passphrase depends on the
+unsigned gem `sqlite3`.
 
 ## Basic usage
 ### Command-line tool
@@ -81,6 +86,7 @@ diceware
 english
 ...
 ```
+
 ### Ruby library
 
 ```ruby
@@ -219,6 +225,7 @@ $ irb -Ilib -rpassphrase
 >> p = Passphrase::Passphrase.new(languages: ["e", "fr"])
 => {:passphrase=>"obstrua lamparos orgy forerez deduce", ... }
 ```
+
 Run the tests with `rake spec`.
 
 ## Changelog
