@@ -52,6 +52,24 @@ module Passphrase
       end
     end
 
+    describe "#indices(4, 1)" do
+      before do
+        @result = @random.indices(4, 1)
+      end
+
+      it "returns an array" do
+        expect(@result).to be_an_instance_of(Array)
+      end
+
+      it "of size 4" do
+        expect(@result.size).to eq(4)
+      end
+
+      it "where each element is zero" do
+        expect(@result).to all eq(0)
+      end
+    end
+
     describe "#die_rolls(6)" do
       before do
         @result = @random.die_rolls(6)
@@ -97,7 +115,7 @@ module Passphrase
         @random = DicewareRandom.new(true)
       end
 
-      it "increments the random.org request count on indices()" do
+      it "increments the RANDOM.ORG request count on indices()" do
         expect {
           @random.indices(4, 15)
           }.to change(DicewareRandom, :random_org_requests).by(1)
