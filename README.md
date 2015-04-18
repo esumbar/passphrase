@@ -192,10 +192,10 @@ network access, it is susceptible to network problems, and is also slower.
 
 ### Subset of languages
 By default, Passphrase randomly selects words from the collection of available
-languages. If desired, the selection can be limited to a subset of languages.
-This can be done on the command-line and in code by supplying a list of
-language names or abbreviations. A minimal abbreviation uses the first one or
-two letters of a language name, just enough to avoid ambiguity.
+languages. If desired, the selection can be limited to a subset. This can be
+done on the command-line and in code by supplying a list of language names or
+abbreviations. An abbreviation comprises the first one or two letters of a
+language name, just enough to avoid ambiguity.
 
 ### Passwords
 A typical passphrase will not satisfy password policies that require the use
