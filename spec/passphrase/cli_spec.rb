@@ -16,12 +16,24 @@ module Passphrase
       expect(CLI).to respond_to(:parse).with(1).argument
     end
 
+    it "does not respond to class method display_languages() (private)" do
+      expect(CLI).not_to respond_to(:display_languages)
+    end
+
     it "does not respond to class method validate_number_of_words() (private)" do
       expect(CLI).not_to respond_to(:validate_number_of_words)
     end
 
+    it "does not respond to class method print_out() (private)" do
+      expect(CLI).not_to respond_to(:print_out)
+    end
+
     it "does not respond to class method handle_error() (private)" do
       expect(CLI).not_to respond_to(:handle_error)
+    end
+
+    it "exits when option -l is supplied" do
+      expect { CLI.parse(["-l"]) }.to raise_error(SystemExit)
     end
 
     it "does not emit an error when option -n 3 is supplied" do
