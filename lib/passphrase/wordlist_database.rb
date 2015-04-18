@@ -45,7 +45,7 @@ module Passphrase
     def validate(language_list)
       language_list.each do |l|
         matches_language = @languages.any? { |language| language.match("^#{l}") }
-        raise "No language match for \"#{l}\"" unless matches_language
+        raise "No language match for #{l}" unless matches_language
       end
     end
   end
@@ -94,7 +94,7 @@ module Passphrase
       when :words
         Word.new(@db)
       else
-        raise "Unknown table"
+        raise "Unknown table #{table}"
       end
     end
 

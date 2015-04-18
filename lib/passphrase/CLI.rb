@@ -92,7 +92,7 @@ module Passphrase
     def self.display_languages(options)
       if options[:languages].empty?
         puts WordlistDatabase.connect.from(:languages).all
-        exit(1)
+        exit(0)
       end
     end
 
