@@ -2,7 +2,7 @@
 Use Passphrase to generate a passphrase for SSH or GPG keys. For example, on
 the command-line, run
 
-```bash
+```
 $ passphrase --num-words=4
 dokusi uolgo allunga totalisa
 ```
@@ -19,7 +19,7 @@ Passphrase also has the capability to generate passwords (indirectly).
 ## Installation
 The Passphrase command-line tool and library can be installed with
 
-```bash
+```
 $ gem install passphrase
 ```
 
@@ -29,13 +29,13 @@ option, which causes the gem to be verified before being installed. To invoke
 this option, you must first add my public key `esumbar.pem` to your list of
 trusted certificates, as follows.
 
-```bash
+```
 $ gem cert --add <(curl -Ls https://raw.githubusercontent.com/esumbar/passphrase/master/certs/esumbar.pem)
 ```
 
 Finally, specify the appropriate security level when installing.
 
-```bash
+```
 $ gem install passphrase --trust-policy MediumSecurity
 ```
 
@@ -46,7 +46,7 @@ unsigned gem `sqlite3`.
 ## Basic usage
 ### Command-line tool
 
-```bash
+```
 $ passphrase --help
 Usage: passphrase [options]
     -l, --languages=LANG1,...    Specify languages to use, none for a listing
@@ -214,7 +214,7 @@ compliment of 7776 entries.
 To run the command-line tool within the repository directory, try `ruby -Ilib
 bin/passphrase`. You can also experiment with the library in irb. For example,
 
-```bash
+```
 $ irb -Ilib -rpassphrase
 >> p = Passphrase::Passphrase.new(number_of_words: 3)
 => {:passphrase=>"jazzy vannier viscount", :number_of_words=>3, ... }
