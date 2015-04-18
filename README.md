@@ -35,8 +35,8 @@ Finally, specify the appropriate security level when installing.
 ```bash
 $ gem install passphrase --trust-policy MediumSecurity
 ```
-Using `MediumSecurity` rather than `HighSecurity` omits dependent gems, in
-this case `sqlite3`, which is not signed, from the verification process.
+Using `MediumSecurity` rather than `HighSecurity` omits dependent gems that
+are not signed from the verification process, in this case `sqlite3`.
 
 ## Basic usage
 ### Command-line tool
@@ -101,10 +101,10 @@ passphrase3 = p.generate.passphrase
 # generate an array of six-word passphrases
 passphrase_array = Array.new(100)
 Passphrase::Passphrase.new(number_of_words: 6) do |p|
-  passphrase_array.map! { |e| p.generate.passphrase }
+  passphrase_array.map! { |array_element| p.generate.passphrase }
 end
 
-# generate a passphrase using the French and Italian wordlists
+# generate a passphrase using only French and Italian words
 options = { number_of_words: 4, languages: %w( fr it ) }
 p = Passphrase::Passphrase.new(options)
 passphrase = p.passphrase
@@ -179,12 +179,11 @@ have the option of requesting random numbers from
 network access, it is susceptible to network problems, and is also slower.
 
 ### Subset of languages
-By default, words are randomly selected from the entire pool of available
-languages. If desired, the pool can be reduced to a subset of languages. This
-can be done on the command-line and in code by supplying a list of language
-names or abbreviations. Use the first one or two letters of a language name in
-an abbreviation, enough to avoid ambiguity. Passphrase will then randomly
-select languages from the subset.
+By default, Passphrase randomly selects words from the collection of available
+languages. If desired, the selection can be limited to a subset of languages.
+This can be done on the command-line and in code by supplying a list of
+language names or abbreviations. A minimal abbreviation uses the first one or
+two letters of a language name, just enough to avoid ambiguity.
 
 ### Passwords
 A typical passphrase will not satisfy password policies that require the use
