@@ -65,6 +65,7 @@ module Passphrase
     def setup_remote_generator
       self.class.class_eval do
         def generate_random_numbers(count, maximum, minimum=0)
+          return Array.new(count, maximum) if maximum == minimum
           # Check quota before proceeding and thereafter every 1000 uses to
           # comply with random.org guidelines.
           check_random_org_quota if self.class.random_org_requests % 1000 == 0
@@ -92,7 +93,7 @@ module Passphrase
           open("#{@random_org_uri}#{query}") do |data|
             quota = data.gets.chomp.to_i
             over_quota_message = "RANDOM.ORG over quota, try again in 10 minutes"
-            raise "ERROR: #{over_quota_message}" if quota < 0
+            raise "#{over_quota_message}" if quota < 0
           end
         end
 
@@ -104,6 +105,7 @@ module Passphrase
     def setup_local_generator
       self.class.class_eval do
         def generate_random_numbers(count, maximum, minimum=0)
+          return Array.new(count, maximum) if maximum == minimum
           max = maximum - minimum + 1
           offset = minimum
           # array_of_random_numbers

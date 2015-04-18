@@ -1,7 +1,5 @@
-require "sqlite3"
 require "passphrase/diceware_random"
-require "passphrase/language_query"
-require "passphrase/word_query"
+require "passphrase/wordlist_database"
 
 module Passphrase
   # This class implements the Diceware Method for generating a passphrase. It
@@ -20,8 +18,9 @@ module Passphrase
     def initialize(options)
       @number_of_words = options[:number_of_words]
       @random = DicewareRandom.new(options[:use_random_org])
-      setup_database
-      setup_queries
+      db = WordlistDatabase.connect
+      @languages = db.from(:languages).only(options[:languages])
+      @words = db.from(:words)
     end
 
     # Runs the Diceware method and returns its result to the calling
@@ -36,18 +35,6 @@ module Passphrase
     end
 
     private
-
-    def setup_database
-      wordlist_file = "wordlist/words.sqlite3"
-      wordlist_path = File.join(File.dirname(__FILE__), wordlist_file)
-      raise "Wordlist database not found" unless File.exist?(wordlist_path)
-      @db = SQLite3::Database.new(wordlist_path, readonly: true)
-    end
-
-    def setup_queries
-      @languages = LanguageQuery.new(@db)
-      @words = WordQuery.new(@db)
-    end
 
     def get_random_languages
       @random_languages = @random.indices(@number_of_words, @languages.count)

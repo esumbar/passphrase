@@ -6,23 +6,13 @@ module Passphrase
       expect(DicewareMethod).to respond_to(:run).with(1).argument
     end
 
-    context "initialized with given options" do
+    context "initialized with default options" do
       before do
-        @number_of_words = 5
-        options = { number_of_words: @number_of_words, use_random_org: nil }
-        @diceware = DicewareMethod.new(options)
+        @diceware = DicewareMethod.new(Default.options)
       end
       
       it "responds to the run() method with no arguments" do
         expect(@diceware).to respond_to(:run)
-      end
-
-      it "does not respond to the setup_database() method (private)" do
-        expect(@diceware).not_to respond_to(:setup_database)
-      end
-
-      it "does not respond to the setup_queries() method (private)" do
-        expect(@diceware).not_to respond_to(:setup_queries)
       end
 
       it "does not respond to the get_random_languages() method (private)" do
@@ -50,9 +40,9 @@ module Passphrase
           )
         end
 
-        it "each array contains :number_of_words elements" do
+        it "each array contains the default number of words elements" do
           @result.each do |result|
-            expect(result.size).to eq(@number_of_words)
+            expect(result.size).to eq(Default.options[:number_of_words])
           end
         end
 
