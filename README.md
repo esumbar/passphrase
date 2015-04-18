@@ -88,10 +88,10 @@ Passphrase::Passphrase.new(options = {})
 The following options are accepted.
 
 * `:languages` - array of languages from which to select words
-  (default: ["all"])
-* `:number_of_words` - number of words in the passphrase (default: 5)
+  (default: `["all"]`)
+* `:number_of_words` - number of words in the passphrase (default: `5`)
 * `:use_random_org` - use RANDOM.ORG as the source of random numbers
-  (default: nil)
+  (default: `nil`)
 
 For example,
 
