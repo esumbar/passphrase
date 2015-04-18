@@ -88,6 +88,21 @@ english
 ```
 
 ### Ruby library
+Initialize a Passphrase object with
+
+```ruby
+Passphrase::Passphrase.new(options = {})
+```
+
+The following options are accepted.
+
+* `:languages` - array of languages from which to select words
+  (default: ["all"])
+* `:number_of_words` - desired number of words (default: 5)
+* `:use_random_org` - flag to use RANDOM.ORG as the source of random numbers
+  (default: nil)
+
+For example,
 
 ```ruby
 require "passphrase"
