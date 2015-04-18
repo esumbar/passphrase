@@ -1,4 +1,7 @@
 module Passphrase
+  # Class instance variables in this class define default values for
+  # {Passphrase} options and the range for the number of words that can be
+  # specified for a passphrase on the command-line.
   class Default
     class << self
       # @return [Hash] the default options that the command line interface
@@ -9,7 +12,12 @@ module Passphrase
       attr_reader :number_range
     end
 
-    @options = { number_of_words: 5, passwordize: nil, use_random_org: nil }
+    @options = {
+      languages: ["all"],
+      number_of_words: 5,
+      passwordize: nil,
+      use_random_org: nil
+    }
     @number_range = (3..10)
   end
 end

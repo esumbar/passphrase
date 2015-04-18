@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## UNRELEASED
+### Added
+- List available languages.
+- Added option `--languages|-l` to select a subset of languages.
+- Added a WordlistDatabase class.
+
 ## Version 1.1.0 - 2015-04-14
 ### Added
 - Added SHA256 checksum calculation to rake_helper.rb.
