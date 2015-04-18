@@ -15,8 +15,8 @@ module Passphrase
     @options = {
       languages: ["all"],
       number_of_words: 5,
-      passwordize: nil,
-      use_random_org: nil
+      passwordize: false,
+      use_random_org: false
     }
     @number_range = (3..10)
   end
