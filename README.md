@@ -87,8 +87,8 @@ Passphrase::Passphrase.new(options={})
 
 The following options are accepted.
 
-* `:languages` - array of languages from which to select words, for example,
-  `["finnish", "norwegian"]` and `["e", "fr", "i"]` (default: `["all"]`)
+* `:languages` - array of languages from which to select words
+  (default: `["all"]`)
 * `:number_of_words` - number of words to select (default: `5`)
 * `:use_random_org` - source random numbers from RANDOM.ORG (default: `false`)
 
@@ -116,7 +116,7 @@ Passphrase::Passphrase.new(number_of_words: 6) do |p|
 end
 
 # generate a passphrase using only French and Italian words
-options = { number_of_words: 4, languages: %w( fr it ) }
+options = { number_of_words: 4, languages: %w( fr italian ) }
 p = Passphrase::Passphrase.new(options)
 passphrase = p.passphrase
 
