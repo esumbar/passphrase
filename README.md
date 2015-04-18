@@ -82,7 +82,7 @@ unsigned gem `sqlite3`.
 Initialize a Passphrase object with
 
 ~~~ruby
-Passphrase::Passphrase.new(options = {})
+Passphrase::Passphrase.new(options={})
 ~~~
 
 The following options are accepted.
