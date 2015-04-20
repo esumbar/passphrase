@@ -4,8 +4,8 @@ module Passphrase
   # specified for a passphrase on the command-line.
   class Default
     class << self
-      # @return [Hash] the default options that the command line interface
-      #   uses to instantiate a {Passphrase} object in {CLI.parse}
+      # @return [Hash] the default options used to instantiate a {Passphrase}
+      #   object
       attr_reader :options
       # @return [Range] an arbitrary range specifying the allowable number of
       #   words in a passphrase, referenced by the {CLI.parse} method
@@ -15,8 +15,8 @@ module Passphrase
     @options = {
       languages: ["all"],
       number_of_words: 5,
-      passwordize: nil,
-      use_random_org: nil
+      passwordize: false,  # only relevant in {CLI.parse}
+      use_random_org: false
     }
     @number_range = (3..10)
   end

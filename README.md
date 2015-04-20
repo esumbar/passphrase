@@ -2,26 +2,23 @@
 Use Passphrase to generate a passphrase for SSH or GPG keys. For example, on
 the command-line, run
 
-```bash
-$ passphrase --num-words=4
-dokusi uolgo allunga totalisa
-```
+    $ passphrase --num-words=4
+    dokusi uolgo allunga totalisa
+
 or programmatically,
 
-```ruby
+~~~ruby
 require "passphrase"
 p = Passphrase::Passphrase.new(number_of_words: 4)
 passphrase = p.passphrase
-```
+~~~
 
 Passphrase also has the capability to generate passwords (indirectly).
 
 ## Installation
 The Passphrase command-line tool and library can be installed with
 
-```bash
-$ gem install passphrase
-```
+    $ gem install passphrase
 
 However, because the gem is cryptographically signed to prevent tampering, the
 preferred installation command should include the `--trust-policy` security
@@ -29,15 +26,11 @@ option, which causes the gem to be verified before being installed. To invoke
 this option, you must first add my public key `esumbar.pem` to your list of
 trusted certificates, as follows.
 
-```bash
-$ gem cert --add <(curl -Ls https://raw.githubusercontent.com/esumbar/passphrase/master/certs/esumbar.pem)
-```
+    $ gem cert --add <(curl -Ls https://raw.githubusercontent.com/esumbar/passphrase/master/certs/esumbar.pem)
 
 Finally, specify the appropriate security level when installing.
 
-```bash
-$ gem install passphrase --trust-policy MediumSecurity
-```
+    $ gem install passphrase --trust-policy MediumSecurity
 
 Using `MediumSecurity` rather than `HighSecurity` omits dependent gems that
 are not signed from the verification process. Passphrase depends on the
@@ -46,50 +39,71 @@ unsigned gem `sqlite3`.
 ## Basic usage
 ### Command-line tool
 
-```bash
-$ passphrase --help
-Usage: passphrase [options]
-    -l, --languages=LANG1,...    Specify languages to use, none for a listing
-                                 (default: --languages=all)
-    -n, --num-words=NUM          Number of words in passphrase 3..10
-                                 (default: --num-words=5)
-    -p, --[no-]passwordize       Add one cap, one num, and one special char
-                                 (default: --no-passwordize)
-    -r, --[no-]random-org        Use RANDOM.ORG to generate random numbers
-                                 (default: --no-random-org)
-    -h, --help                   Show this message
-    -v, --version                Show version
+    $ passphrase --help
+    Usage: passphrase [options]
+        -l, --languages=LANG1,...    Specify languages to use, none for a listing
+                                     (default: --languages=all)
+        -n, --num-words=NUM          Number of words in passphrase 3..10
+                                     (default: --num-words=5)
+        -p, --[no-]passwordize       Add one cap, one num, and one special char
+                                     (default: --no-passwordize)
+        -r, --[no-]random-org        Use RANDOM.ORG to generate random numbers
+                                     (default: --no-random-org)
+        -h, --help                   Show this message
+        -v, --version                Show version
 
-$ # generate a passphrase using default settings
-$ passphrase
-sinmak termyne ismus affidavo recur
+    $ # generate a passphrase using default settings
+    $ passphrase
+    sinmak termyne ismus affidavo recur
 
-$ # generate a four-word passphrase
-$ passphrase -n4
-apaisado vermouth seemag ebelik
+    $ # generate a four-word passphrase
+    $ passphrase -n4
+    apaisado vermouth seemag ebelik
 
-$ # generate a passphrase using only English and Spanish words
-$ passphrase --languages=english,spanish
-fumada hearsay murcio phosphor azufroso
+    $ # generate a passphrase using only English and Spanish words
+    $ passphrase --languages=english,spanish
+    fumada hearsay murcio phosphor azufroso
 
-$ # generate a three-word Polish passphrase and password
-$ passphrase -lp -n3 -p
-podejrza zmalala wypadkow
-8odej=za_Xmalala_wypadkow
+    $ # generate a three-word Polish passphrase and password
+    $ passphrase -lp -n3 -p
+    podejrza zmalala wypadkow
+    8odej=za_Xmalala_wypadkow
 
-$ # list the available languages
-$ passphrase -l
-afrikaans
-croatian
-czech
-diceware
-english
-...
-```
+    $ # list the available languages
+    $ passphrase -l
+    afrikaans
+    croatian
+    czech
+    diceware
+    english
+    finnish
+    french
+    italian
+    japanese
+    latin
+    norwegian
+    polish
+    spanish
+    swedish
+    turkish
 
 ### Ruby library
+Initialize a Passphrase object with
 
-```ruby
+~~~ruby
+Passphrase::Passphrase.new(options={})
+~~~
+
+The following options are accepted.
+
+* `:languages` - array of languages from which to select words
+  (default: `["all"]`)
+* `:number_of_words` - number of words to select (default: `5`)
+* `:use_random_org` - source random numbers from RANDOM.ORG (default: `false`)
+
+For example,
+
+~~~ruby
 require "passphrase"
 
 # generate a passphrase with default options
@@ -110,8 +124,8 @@ Passphrase::Passphrase.new(number_of_words: 6) do |p|
   passphrase_array.map! { |array_element| p.generate.passphrase }
 end
 
-# generate a passphrase using only French and Italian words
-options = { number_of_words: 4, languages: %w( fr it ) }
+# generate a four-word passphrase using only French and Italian words
+options = { languages: %w( fr italian ), number_of_words: 4 }
 p = Passphrase::Passphrase.new(options)
 passphrase = p.passphrase
 
@@ -119,7 +133,7 @@ passphrase = p.passphrase
 p = Passphrase::Passphrase.new(number_of_words: 3)
 passphrase = p.passphrase
 password   = passphrase.to_password
-```
+~~~
 
 ## Background
 ### Diceware Method
@@ -186,10 +200,9 @@ network access, it is susceptible to network problems, and is also slower.
 
 ### Subset of languages
 By default, Passphrase randomly selects words from the collection of available
-languages. If desired, the selection can be limited to a subset of languages.
-This can be done on the command-line and in code by supplying a list of
-language names or abbreviations. A minimal abbreviation uses the first one or
-two letters of a language name, just enough to avoid ambiguity.
+languages. If desired, the selection can be restricted to a subset. This can
+be done on the command-line and in code by supplying a list of language names.
+The names can be abbreviated to the first letter (or two, to avoid ambiguity).
 
 ### Passwords
 A typical passphrase will not satisfy password policies that require the use
@@ -214,17 +227,15 @@ compliment of 7776 entries.
 To run the command-line tool within the repository directory, try `ruby -Ilib
 bin/passphrase`. You can also experiment with the library in irb. For example,
 
-```bash
-$ irb -Ilib -rpassphrase
->> p = Passphrase::Passphrase.new(number_of_words: 3)
-=> {:passphrase=>"jazzy vannier viscount", :number_of_words=>3, ... }
->> p.passphrase
-=> "jazzy vannier viscount"
->> p.passphrase.to_password
-=> "jazz{_2annier_vBscount"
->> p = Passphrase::Passphrase.new(languages: ["e", "fr"])
-=> {:passphrase=>"obstrua lamparos orgy forerez deduce", ... }
-```
+    $ irb -Ilib -rpassphrase
+    >> p = Passphrase::Passphrase.new(number_of_words: 3)
+    => {:passphrase=>"jazzy vannier viscount", :number_of_words=>3, ... }
+    >> p.passphrase
+    => "jazzy vannier viscount"
+    >> p.passphrase.to_password
+    => "jazz{_2annier_vBscount"
+    >> p = Passphrase::Passphrase.new(languages: ["e", "fr"])
+    => {:passphrase=>"obstrua lamparos orgy forerez deduce", ... }
 
 Run the tests with `rake spec`.
 

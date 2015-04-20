@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## Version 1.2.1 - 2015-04-19
+### Changed
+- Updated documentation in the README file.
+
 ## Version 1.2.0 - 2015-04-17
 ### Added
 - List available languages.
