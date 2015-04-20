@@ -76,7 +76,16 @@ unsigned gem `sqlite3`.
     czech
     diceware
     english
-    ...
+    finnish
+    french
+    italian
+    japanese
+    latin
+    norwegian
+    polish
+    spanish
+    swedish
+    turkish
 
 ### Ruby library
 Initialize a Passphrase object with
@@ -115,8 +124,8 @@ Passphrase::Passphrase.new(number_of_words: 6) do |p|
   passphrase_array.map! { |array_element| p.generate.passphrase }
 end
 
-# generate a passphrase using only French and Italian words
-options = { number_of_words: 4, languages: %w( fr italian ) }
+# generate a four-word passphrase using only French and Italian words
+options = { languages: %w( fr italian ), number_of_words: 4 }
 p = Passphrase::Passphrase.new(options)
 passphrase = p.passphrase
 
@@ -191,10 +200,9 @@ network access, it is susceptible to network problems, and is also slower.
 
 ### Subset of languages
 By default, Passphrase randomly selects words from the collection of available
-languages. If desired, the selection can be limited to a subset. This can be
-done on the command-line and in code by supplying a list of language names or
-abbreviations. An abbreviation comprises the first one or two letters of a
-language name, just enough to avoid ambiguity.
+languages. If desired, the selection can be restricted to a subset. This can
+be done on the command-line and in code by supplying a list of language names.
+The names can be abbreviated to the first letter (or two, to avoid ambiguity).
 
 ### Passwords
 A typical passphrase will not satisfy password policies that require the use
